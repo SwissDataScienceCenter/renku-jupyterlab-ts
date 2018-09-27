@@ -1,0 +1,42 @@
+{
+  "name": "renku-jupyterlab-ts",
+  "version": "0.1.0",
+  "description": "A Renku extension for JupyterLab.",
+  "keywords": [
+    "jupyter",
+    "jupyterlab",
+    "jupyterlab-extension"
+  ],
+  "homepage": "https://github.com/SwissDataScienceCenter/renku-jupyterlab-ts",
+  "bugs": {
+    "url": "https://github.com/SwissDataScienceCenter/renku-jupyterlab-ts/issues"
+  },
+  "license": "BSD-3-Clause",
+  "author": "Jiri Kuncar",
+  "files": [
+    "lib/**/*.{d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}",
+    "style/**/*.{css,eot,gif,html,jpg,json,png,svg,woff2,ttf}"
+  ],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SwissDataScienceCenter/renku-jupyterlab-ts.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf lib",
+    "watch": "tsc -w",
+    "prepare": "npm run clean && npm run build"
+  },
+  "dependencies": {
+    "@jupyterlab/application": "^0.18.0"
+  },
+  "devDependencies": {
+    "rimraf": "^2.6.1",
+    "typescript": "~2.9.2"
+  },
+  "jupyterlab": {
+    "extension": true
+  }
+}
