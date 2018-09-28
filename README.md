@@ -19,14 +19,15 @@ jupyter labextension install renku-jupyterlab-ts
 For a development install (requires npm version 4 or later), do the following in the repository directory:
 
 ```bash
-npm install
-npm run build
+npm install -g yarn
+yarn install
+yarn build
 jupyter labextension link .
 ```
 
 To rebuild the package and the JupyterLab app:
 
 ```bash
-npm run build
+yarn build
 jupyter lab build
 ```
