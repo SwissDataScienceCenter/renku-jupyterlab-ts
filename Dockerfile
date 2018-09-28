@@ -1,15 +1,9 @@
-FROM python:3.7-alpine
+FROM node:alpine
+COPY . /srv
+WORKDIR /srv
+RUN npm install && npm run build && npm pack
 
-COPY Pipfile Pipfile.lock /code/
-
-WORKDIR /code
-
-RUN pip install -U pip pipenv && \
-    pipenv install
-
-COPY . /code
-
-RUN pipenv run jlpm install && \
-    pipenv run jupyter labextension install . --no-build
-
-CMD ["pipenv", "run", "jupyter", "lab", "--watch"]
+FROM renku/singleuser:latest
+COPY --from=0 /srv/renku-jupyterlab-ts-*.tgz /home/$NB_USER/
+RUN pip install -U jupyterlab papermill && \
+    jupyter labextension install --debug /home/$NB_USER/renku-jupyterlab-ts-*.tgz
