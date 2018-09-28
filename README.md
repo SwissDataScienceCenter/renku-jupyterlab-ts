@@ -2,6 +2,7 @@
 
 A Renku extension for JupyterLab.
 
+*Nothing lasts forever. Except for reproducible research made with Renku.*
 
 ## Prerequisites
 
@@ -29,4 +30,3 @@ To rebuild the package and the JupyterLab app:
 npm run build
 jupyter lab build
 ```
-
