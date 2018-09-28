@@ -16,7 +16,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+notifications:
+  email: false
+
 language: node_js
+
 node_js:
   - "8"
   - "10"
