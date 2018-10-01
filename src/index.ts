@@ -19,6 +19,7 @@
 
 import { JupyterLab, JupyterLabPlugin } from '@jupyterlab/application';
 import { ICommandPalette, MainAreaWidget } from '@jupyterlab/apputils';
+import { PathExt } from '@jupyterlab/coreutils';
 import { INotebookTracker } from '@jupyterlab/notebook';
 import { TerminalSession } from "@jupyterlab/services/lib";
 import { ITerminalTracker, Terminal } from '@jupyterlab/terminal';
@@ -62,7 +63,9 @@ const extension: JupyterLabPlugin<void> = {
 
         console.log('current notebook: ', nbWidget);
 
-        const term = new Terminal({ initialCommand: 'git add -A; git commit -a -m "renku: autosave"' });
+        const term = new Terminal({
+          initialCommand: `git add -A; git commit -a -m "renku: autosave"; cd ${PathExt.dirname(nbWidget.context.path)}`
+        });
 
         let widget: Widget = new MainAreaWidget({ content: term });
         widget.id = 'renku-run';
@@ -86,9 +89,10 @@ const extension: JupyterLabPlugin<void> = {
             // tracker.add(main);
             app.shell.activateById(widget.id);
 
+            const nbBasename = PathExt.basename(nbWidget.context.path);
             const termMsg: TerminalSession.IMessage = {
               type: "stdin" as TerminalSession.MessageType,
-              content: [`renku run papermill ${nbWidget.context.path} ${nbWidget.context.path.replace('.ipynb', '.ran.ipynb')}\n`]
+              content: [`renku run papermill ${nbBasename} ${nbBasename.replace('.ipynb', '.ran.ipynb')}\n`]
             };
 
             console.log(session.send(termMsg));
