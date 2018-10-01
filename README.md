@@ -32,3 +32,10 @@ To rebuild the package and the JupyterLab app:
 yarn build
 jupyter lab build
 ```
+
+### Release Process
+
+```bash
+npm version [major | minor | patch] -m 'release: v%s'
+git push upstream master --tags
+```
