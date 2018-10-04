@@ -60,11 +60,18 @@ const extension: JupyterLabPlugin<void> = {
       label: 'Run notebook with Renku',
       execute: () => {
         const nbWidget = notebooks.currentWidget;
+        const nbDirname = PathExt.dirname(nbWidget.context.path);
+
+        let initialCommand = 'git add -A; git commit -a -m "renku: autosave";';
+        if (nbDirname !== '') {
+          // Change directory only when it is necessary
+          initialCommand += `cd ${nbDirname};`
+        }
 
         console.log('current notebook: ', nbWidget);
 
         const term = new Terminal({
-          initialCommand: `git add -A; git commit -a -m "renku: autosave"; cd ${PathExt.dirname(nbWidget.context.path)}`
+          initialCommand: initialCommand
         });
 
         let widget: Widget = new MainAreaWidget({ content: term });
