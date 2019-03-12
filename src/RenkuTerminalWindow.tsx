@@ -5,20 +5,16 @@ import { JupyterLab } from '@jupyterlab/application';
 
 class RenkuTerminalWindow extends MainAreaWidget<Widget> {
 
-    constructor(options: MainAreaWidget.IOptions<Widget>){
+    constructor(options: MainAreaWidget.IOptions<Widget>) {
         super(options);
         this.id = 'renku-run';
         this.title.label = 'Renku Terminal';
-        this.title.caption='Renku Caption';
+        this.title.caption = 'Renku Caption';
         this.title.iconClass = 'sdsc-WindowIcon p-TabBarIcon';
         this.title.closable = true;
-
-        //let widget : MainAreaWidget = this;
-        
-        // console.log(tracker.currentWidget);
     }
 
-    public attachToMainArea = (app :JupyterLab) => {
+    public attachToMainArea = (app: JupyterLab) => {
         if (!this.isAttached) {
             // Attach the widget to the main work area if it's not there
             app.shell.addToMainArea(this);
@@ -26,9 +22,8 @@ class RenkuTerminalWindow extends MainAreaWidget<Widget> {
         }
     }
 
-    onBeforeDetach(){
+    onBeforeDetach() {
         this.dispose();
-       // this.node.remove();
     }
 
-}export default RenkuTerminalWindow;
+} export default RenkuTerminalWindow;

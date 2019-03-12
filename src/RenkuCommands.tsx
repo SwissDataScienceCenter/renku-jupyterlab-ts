@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import RenkuCommand from './RenkuCommand';
-import RenkuCommandForm from './RenkuCommandForm';
 import RenkuTerminalManager from './RenkuTerminalManager';
 import RenkuPapermillCommand from './RenkuRunPapermillCommand';
 import { JupyterLab } from '@jupyterlab/application';
@@ -21,9 +20,9 @@ class RenkuCommands extends React.Component<IRenkuCommands>{
         this.state = {
             currentWidget: this.props.app.shell.currentWidget
         }
-        this.props.app.shell.currentChanged.connect(()=>{
-            console.log("changeeeeedddd ddd dd d");
-            this.setState({currentWidget:this.props.app.shell.currentWidget})});
+        this.props.app.shell.currentChanged.connect(() => {
+            this.setState({ currentWidget: this.props.app.shell.currentWidget })
+        });
     };
 
     render() {
@@ -32,37 +31,33 @@ class RenkuCommands extends React.Component<IRenkuCommands>{
                 <RenkuCommand
                     id="renkustatus"
                     name="renku status"
-                    command="status"
-                    shortcut="shortcut"
+                    command="renku status"
                     terminalManager={this.props.terminalManager}
-                    arguments={new Array<string>()} />
+                    arguments={[]} />
 
                 <RenkuCommand
                     id="renkulog"
                     name="log"
                     command="renku log"
-                    shortcut="shortcut 2"
                     terminalManager={this.props.terminalManager}
-                    arguments={new Array<string>()} />
+                    arguments={[]} />
 
-                { (this.props.app.shell.currentWidget!==null && this.props.app.shell.currentWidget.constructor.name === 'NotebookPanel') ?
-                    <RenkuPapermillCommand
-                        id="renkupapermill"
-                        name="run papermill"
-                        command="renku papermill"
-                        shortcut="shortcut 2"
-                        app={this.props.app}
-                        terminalManager={this.props.terminalManager}
-                        arguments={new Array<string>()}
-                        notebooks={this.props.notebooks} /> :
-                    <p />
-                }
-
-                <RenkuCommandForm
-                    name="run"
+                <RenkuCommand
+                    id="renkurun"
+                    name="renku run"
                     command="renku run"
-                    shortcut="shortcut 2"
-                    terminalManager={this.props.terminalManager} />
+                    terminalManager={this.props.terminalManager}
+                    arguments={["arguments... run -h for help"]} />
+
+                <RenkuPapermillCommand
+                    id="renkupapermill"
+                    name="renku run papermill"
+                    command="renku run papermill"
+                    app={this.props.app}
+                    enabled={this.props.app.shell.currentWidget !== null && this.props.app.shell.currentWidget.constructor.name === 'NotebookPanel'}
+                    terminalManager={this.props.terminalManager}
+                    arguments={[]}
+                    notebooks={this.props.notebooks} />
             </ul>
         );
     };
@@ -81,15 +76,13 @@ class GitCommands extends React.Component<IRenkuCommands>{
                     id="gitpush"
                     name="push"
                     command="git push"
-                    shortcut="shortcut"
                     terminalManager={this.props.terminalManager}
-                    arguments={new Array<string>()} />
+                    arguments={[]} />
 
                 <RenkuCommand
                     id="gitcommit"
                     name="commit"
                     command="git commit"
-                    shortcut="shortcut 2"
                     terminalManager={this.props.terminalManager}
                     arguments={["-m"]} />
             </ul>

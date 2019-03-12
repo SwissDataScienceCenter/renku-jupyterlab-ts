@@ -30,15 +30,11 @@ class RenkuTerminalManager {
             this.terminal.dispose();
         this.terminal = new Terminal();
         this.widget = new RenkuTerminalWindow({ content: this.terminal });
-        //this.widget.attachToMainArea(this.props.app);
-
     }
 
     runCommand(command: string) {
-
         const { serviceManager } = this.props.app;
         const services = serviceManager;
-
         if (this.sessionPromise === undefined) {
             this.sessionPromise = services.terminals.startNew();
         }
@@ -54,7 +50,6 @@ class RenkuTerminalManager {
                 const termMsg: TerminalSession.IMessage = {
                     type: "stdin" as TerminalSession.MessageType,
                     content: [command + '\n']
-                    //[`renku run papermill ${nbBasename} ${nbBasename.replace('.ipynb', '.ran.ipynb')}\n`]
                 };
 
                 this.terminal.session.send(termMsg);
