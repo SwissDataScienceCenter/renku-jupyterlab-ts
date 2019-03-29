@@ -8,6 +8,7 @@ ipython = "==6.5.0"
 jupyterlab = "*"
 renku = "*"
 papermill = "*"
+notebook = ">=5.7.2"
 
 [dev-packages]
 
