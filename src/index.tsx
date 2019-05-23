@@ -1,6 +1,5 @@
 import RenkuTabBar from './RenkuTabBar';
 import RenkuTerminalManager from './RenkuTerminalManager';
-
 import {
   ILayoutRestorer,
   JupyterLabPlugin,
@@ -9,7 +8,6 @@ import {
 
 import { INotebookTracker } from '@jupyterlab/notebook';
 import { ITerminalTracker } from '@jupyterlab/terminal';
-
 
 function activate(app: JupyterLab, restorer: ILayoutRestorer, notebooks: INotebookTracker) {
   const { shell } = app;

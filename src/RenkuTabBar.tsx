@@ -8,7 +8,7 @@ import '../style/index.css';
 
 import { JupyterLab } from '@jupyterlab/application';
 import { INotebookTracker } from '@jupyterlab/notebook';
-import RenkuCommands from './RenkuCommands';
+import RenkuCommands, { HelpCommands } from './RenkuCommands';
 import { GitCommands } from './RenkuCommands';
 import RenkuTerminalManager from './RenkuTerminalManager';
 
@@ -30,6 +30,7 @@ class RenkuTabBar extends TabBar<void>{
     this.title.caption = 'Renku';
     this.createTabBarItem('Git','git-tab',this.node,this.contentNode);
     this.createTabBarItem('Renku','renku-tab',this.node,this.contentNode);
+    this.createTabBarItem('Help','renku-tab-help',this.node,this.contentNode);
     this.props = props;
   }
 
@@ -63,6 +64,16 @@ class RenkuTabBar extends TabBar<void>{
           terminalManager: this.props.terminalManager
         }),
       document.getElementById('renku-tab-content')
+    );
+
+    ReactDOM.render(
+      React.createElement(HelpCommands,
+        {
+          app: this.props.app,
+          notebooks: this.props.notebooks,
+          terminalManager: this.props.terminalManager
+        }),
+      document.getElementById('renku-tab-help-content')
     );
     
   };

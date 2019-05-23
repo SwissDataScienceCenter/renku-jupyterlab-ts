@@ -16,8 +16,7 @@ class RenkuTerminalWindow extends MainAreaWidget<Widget> {
 
     public attachToMainArea = (app: JupyterLab) => {
         if (!this.isAttached) {
-            // Attach the widget to the main work area if it's not there
-            app.shell.addToMainArea(this);
+            app.shell.addToMainArea(this, {mode:"split-bottom"});
             app.shell.activateById(this.id);
         }
     }

@@ -1,0 +1,119 @@
+.icon-first-steps {
+    background: url('../style/icons/icons8-classroom-100.png');
+    height: 60px;
+    width: 60px; 
+    background-repeat: no-repeat;
+    background-size: 60px 60px;
+    display: -webkit-inline-box;
+    /* Other styles here */
+}
+
+.icon-help-cli {
+    background: url('../style/icons/icons8-command-line-100.png');
+    height: 60px;
+    width: 60px; 
+    background-repeat: no-repeat;
+    background-size: 60px 60px;
+    display: -webkit-inline-box;
+    /* Other styles here */
+}
+
+.icon-more-renku {
+    background: url('../style/icons/icons8-search-100.png');
+    height: 60px;
+    width: 60px; 
+    background-repeat: no-repeat;
+    background-size: 60px 60px;
+    display: -webkit-inline-box;
+    /* Other styles here */
+}
+
+.icon-inspiration {
+    background: url('../style/icons/icons8-innovation-100.png');
+    height: 60px;
+    width: 60px; 
+    background-repeat: no-repeat;
+    background-size: 60px 60px;
+    display: -webkit-inline-box;
+    /* Other styles here */
+}
+
+.icon-something-wrong {
+    background: url('../style/icons/icons8-online-support-100.png');
+    height: 60px;
+    width: 60px; 
+    background-repeat: no-repeat;
+    background-size: 60px 60px;
+    display: -webkit-inline-box;
+    /* Other styles here */
+}
+
+.icon-renku-team {
+    background: url('../style/icons/icons8-people-100.png');
+    height: 60px;
+    width: 60px; 
+    background-repeat: no-repeat;
+    background-size: 60px 60px;
+    display: -webkit-inline-box;
+    /* Other styles here */
+}
+
+.icon-help-tab {
+    background: url('../style/icons/icons8-question-mark-48.png');
+    min-width: 15px;
+    min-height: 15px;
+    background-size: 15px;
+    display: inline-block;
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.icon-what-is {
+    background: url('../style/icons/icons8-ask-100.png');
+    height: 60px;
+    width: 60px; 
+    background-repeat: no-repeat;
+    background-size: 60px 60px;
+    display: -webkit-inline-box;
+}
+
+.icon-what-it-does {
+    background: url('../style/icons/icons8-work-light-100.png');
+    height: 60px;
+    width: 60px; 
+    background-repeat: no-repeat;
+    background-size: 60px 60px;
+    display: -webkit-inline-box;
+}
+
+.icon-something-else {
+    background: url('../style/icons/icons8-work-100.png');
+    height: 60px;
+    width: 60px; 
+    background-repeat: no-repeat;
+    background-size: 60px 60px;
+    display: -webkit-inline-box;
+}
+
+.icon-help-docu{
+    background: url('../style/icons/icons8-help-100-2.png');
+    height: 60px;
+    width: 60px; 
+    background-repeat: no-repeat;
+    background-size: 60px 60px;
+    display: -webkit-inline-box;
+}
+
+.about-footer{
+    /* position: absolute; */
+    bottom: 0;
+    width: 100%;
+    margin-left: 1.5em;
+    height: 2.5rem;
+    background:white;
+}
+
+.overflow-y-scroll{
+    overflow-y:scroll !important;
+}

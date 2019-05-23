@@ -18,6 +18,7 @@ export interface IRenkuPapermillCommand {
     enabled: boolean;
 };
 
+// renku dataset import --help
 
 class RenkuPapermillCommand extends React.Component<IRenkuPapermillCommand, { firstClick: boolean, show: boolean, rows: number, paramsValueProcessed: string, paramsValueUnprocessed: string }> {
     constructor(props: IRenkuPapermillCommand) {
@@ -145,7 +146,7 @@ class RenkuPapermillCommand extends React.Component<IRenkuPapermillCommand, { fi
                 <div className="p-CommandPalette-itemIcon"></div>
                 <textarea id="parameters-raw-text" rows={this.state.rows} readOnly={true} value={this.state.paramsValueUnprocessed} disabled={!this.props.enabled} className={"jp-textEditorTabBar rk-innerTabTextArea"} />
             </li>
-            : null;
+            : <p key="parameters-raw"></p>
 
         let editTextArea = this.hasParameters() ?
             <li id="parameters-processed" key="parameters-processed" hidden={!this.hasParameters()} className={"rk-innerTabElement p-CommandPalette-item " + showOrHide} >
@@ -155,7 +156,7 @@ class RenkuPapermillCommand extends React.Component<IRenkuPapermillCommand, { fi
                     Run
                  </button>
             </li>
-            : null;
+            : <p key="parameters-processed"></p>
 
         return ([
             <li key={this.props.id} id={this.props.id} className={enabled} onClick={this.handleFirstClick}>

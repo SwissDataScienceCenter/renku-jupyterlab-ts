@@ -72,6 +72,9 @@
 
 .rk-innerTabElement{
     padding-right: 24px;
+    background: var(--jp-layout-color2);
+    border-top: var(--jp-border-width) solid var(--jp-border-color0);
+    border-bottom: var(--jp-border-width) solid var(--jp-border-color0);
 }
 
 .rk-innerTabTextArea{
@@ -87,10 +90,66 @@
 }
 
 .rk-innerTabTextArea:focus {
-    outline-color: var(--jp-cell-editor-active-border-color);
+    outline-color: #334acd;
     outline-width: medium;
 }
 
 .rk-innerTabTextArea:disabled{
     color: var(--jp-ui-font-color3);
+}
+
+.rk-checkbox{
+    margin: 0px 8px 0px 0px;
+    line-height: 28px;
+    font-size: large;
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    -ms-flex-item-align: center;
+    align-self: center;
+    opacity: 1 !important;
+    position: unset !important;
+}
+
+.rk-checkbox:checked{
+    color: #5561a6;
+}
+
+.rk-checkbox:hover{
+    color: #262261;
+}
+
+.rk-argumentsForm{
+    padding-right:8px;
+    padding-left:8px;
+    font-weight:100;
+    width: 100%;
+}
+
+.rk-argumentsForm button{
+    float: right;
+    color: #fff;
+    background-color: #5561a6;
+    letter-spacing: .5px;
+    border: none;
+    height: 30px;
+    padding: 0 12px;
+    text-transform: uppercase;
+    margin-top:4px;
+    margin-bottom:4px;
+}
+
+.rk-argumentsForm button:hover{
+    background-color: #262261;
+}
+
+.rk-argumentsForm button:focus{
+    background-color: #262261;
+}
+
+.rk-argumentsForm label{
+    color: var(--jp-ui-font-color1);
+    font-size: var(--jp-ui-font-size1);
 }

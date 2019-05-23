@@ -12,6 +12,8 @@
     "strictNullChecks": false,
     "target": "es2015",
     "jsx": "react",
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
     "types": []
   },
   "include": ["src/*"]
