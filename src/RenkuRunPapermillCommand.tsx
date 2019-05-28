@@ -18,8 +18,17 @@ export interface IRenkuPapermillCommand {
     enabled: boolean;
 };
 
+type RunPapermillState = {
+    firstClick: boolean,
+    show: boolean,
+    rows: number,
+    paramsValueProcessed: string,
+    paramsValueUnprocessed: string,
+    hasParameters: boolean,
+    notebookIsActive: boolean
+};
 
-class RenkuPapermillCommand extends React.Component<IRenkuPapermillCommand, { firstClick: boolean, show: boolean, rows: number, paramsValueProcessed: string, paramsValueUnprocessed: string }> {
+class RenkuPapermillCommand extends React.Component<IRenkuPapermillCommand, RunPapermillState> {
     constructor(props: IRenkuPapermillCommand) {
         super(props);
         this.state = {
@@ -27,7 +36,9 @@ class RenkuPapermillCommand extends React.Component<IRenkuPapermillCommand, { fi
             show: false,
             rows: 0,
             paramsValueProcessed: "parameters...",
-            paramsValueUnprocessed: "parameters..."
+            paramsValueUnprocessed: "parameters...",
+            hasParameters: this.hasParameters(),
+            notebookIsActive: false
         }
         this.handleFirstClick = this.handleFirstClick.bind(this);
         this.handleSecondClick = this.handleSecondClick.bind(this);
@@ -52,8 +63,7 @@ class RenkuPapermillCommand extends React.Component<IRenkuPapermillCommand, { fi
     }
 
     handleSecondClick() {
-        let textAreaCmd: HTMLTextAreaElement = document.getElementById('parameters-processed-text') as HTMLTextAreaElement;
-        let textValue = " " + textAreaCmd.value.replace("\n", " ");
+        let textValue = " " + this.state.paramsValueProcessed.replace("\n", " ");
         this.renkuRunPapermill(textValue);
     }
 
@@ -85,18 +95,27 @@ class RenkuPapermillCommand extends React.Component<IRenkuPapermillCommand, { fi
 
     handleFirstClick() {
         if (this.props.enabled) {
-            const nbWidget: NotebookPanel = this.props.app.shell.currentWidget as NotebookPanel;
-            this.processParameters();
-            if (this.hasParameters()) {
-                this.showAndHide();
-            } else {
-                const nbDirname = PathExt.dirname(nbWidget.context.path);
-                if (nbDirname !== '') {
-                    this.props.terminalManager.runCommand(`cd ${nbDirname};`);
+            if (this.state.hasParameters !== this.hasParameters()) {
+                const hasParams = this.hasParameters();
+                if (hasParams) {
+                    this.setState({ hasParameters: hasParams });
+                    this.processParameters();
+                    this.showAndHide();
                 }
-                const nbBasename = PathExt.basename(nbWidget.context.path);
-                let command = `renku run papermill ${nbBasename} ${nbBasename.replace('.ipynb', '.ran.ipynb')}\n`
-                this.props.terminalManager.runCommand(command);
+            } else {
+                const nbWidget: NotebookPanel = this.props.app.shell.currentWidget as NotebookPanel;
+                this.processParameters();
+                if (this.state.hasParameters || this.hasParameters()) {
+                    this.showAndHide();
+                } else {
+                    const nbDirname = PathExt.dirname(nbWidget.context.path);
+                    if (nbDirname !== '') {
+                        this.props.terminalManager.runCommand(`cd ${nbDirname};`);
+                    }
+                    const nbBasename = PathExt.basename(nbWidget.context.path);
+                    let command = `renku run papermill ${nbBasename} ${nbBasename.replace('.ipynb', '.ran.ipynb')}\n`
+                    this.props.terminalManager.runCommand(command);
+                }
             }
         }
     }
@@ -132,30 +151,17 @@ class RenkuPapermillCommand extends React.Component<IRenkuPapermillCommand, { fi
         this.setState(prevState => ({ show: !prevState.show }));
     }
 
+    handleTextArgChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
+        this.setState({ paramsValueProcessed: e.target.value });
+    }
+
     render() {
         let enabled = this.props.enabled ? "p-CommandPalette-item" : "p-CommandPalette-item p-mod-disabled";
         let showOrHide = this.state.show ? "" : "jp-display-none";
         let icon = this.state.show ? "jp-closedTabElement" : "jp-openedTabElement";
-        let iconHtml = this.hasParameters() ?
+        let iconHtml = this.state.hasParameters ?
             <div className={"p-CommandPalette-itemIcon " + icon}></div> :
             <div className={"p-CommandPalette-itemIcon "} ></div>
-
-        let noEditTextArea = this.hasParameters() ?
-            <li id="parameters-raw" key="parameters-raw" className={"rk-innerTabElement p-CommandPalette-item " + showOrHide + " " + enabled} >
-                <div className="p-CommandPalette-itemIcon"></div>
-                <textarea id="parameters-raw-text" rows={this.state.rows} readOnly={true} value={this.state.paramsValueUnprocessed} disabled={!this.props.enabled} className={"jp-textEditorTabBar rk-innerTabTextArea"} />
-            </li>
-            : null;
-
-        let editTextArea = this.hasParameters() ?
-            <li id="parameters-processed" key="parameters-processed" hidden={!this.hasParameters()} className={"rk-innerTabElement p-CommandPalette-item " + showOrHide} >
-                <div className="p-CommandPalette-itemIcon"></div>
-                <textarea id="parameters-processed-text" rows={this.state.rows} value={this.state.paramsValueProcessed} disabled={!this.props.enabled} className={"jp-textEditorTabBar rk-innerTabTextArea"} />
-                <button onClick={this.handleSecondClick}>
-                    Run
-                 </button>
-            </li>
-            : null;
 
         return ([
             <li key={this.props.id} id={this.props.id} className={enabled} onClick={this.handleFirstClick}>
@@ -166,9 +172,20 @@ class RenkuPapermillCommand extends React.Component<IRenkuPapermillCommand, { fi
                     </div>
                 </div>
             </li>,
-            noEditTextArea
-            ,
-            editTextArea
+            this.state.hasParameters ? <div key="parameterRender">
+                <li className={"rk-innerTabElement p-CommandPalette-item p-display-none " + showOrHide}>
+                    <div className="p-CommandPalette-itemIcon"></div>
+                    <div id="runrenkupapermill-input" className="rk-argumentsForm">
+                        <div>Parameters (From Cell)
+                    <textarea id="parameters-raw-text" rows={this.state.rows + 1} readOnly={true} value={this.state.paramsValueUnprocessed} disabled={!this.props.enabled} className={"jp-textEditorTabBar rk-innerTabTextArea"} />
+                        </div>
+                        <div>Parameters (Processed - to edit)
+                    <textarea id="parameters-processed-text" rows={this.state.rows + 1} value={this.state.paramsValueProcessed} disabled={!this.props.enabled} className={"jp-textEditorTabBar rk-innerTabTextArea"} onChange={e => this.handleTextArgChange(e)} />
+                        </div>
+                        <button onClick={this.handleSecondClick} >Run</button>
+                    </div>
+                </li>
+            </div> : null
         ]
         );
     }

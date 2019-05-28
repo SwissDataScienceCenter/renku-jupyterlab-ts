@@ -140,9 +140,6 @@ class RenkuCommand extends React.Component<IRenkuCommand, { show: boolean }>{
                 </li>,
                 <div id={"args-" + this.props.id} key={"args-" + this.props.id} className={showOrHide}>
                     <RenkuCommandArgs {...this.props} />
-
-
-
                 </div>
             ]
         );

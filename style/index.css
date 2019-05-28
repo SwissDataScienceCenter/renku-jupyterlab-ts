@@ -80,13 +80,13 @@
 .rk-innerTabTextArea{
     background-color: var(--jp-cell-editor-background);
     resize:none;
+    height: auto !important;
 }
 
 .rk-innerTabTextArea:read-only {
     background-color: var(--jp-cell-editor-background);
     border: var(--jp-border-width) dashed var(--jp-input-border-color);
     outline-width: 0;
-    box-sizing: content-box;
 }
 
 .rk-innerTabTextArea:focus {

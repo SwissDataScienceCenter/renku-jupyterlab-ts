@@ -74,24 +74,6 @@ class RenkuCommands extends React.Component<IRenkuCommands>{
                     notebooks={this.props.notebooks} />
 
                 <RenkuCommand
-                    id="datasetcreate"
-                    name="Create Datasettt"
-                    command="renku dataset create"
-                    terminalManager={this.props.terminalManager}
-                    arguments={[{id:"datasetname", label:"Dataset Name", arg:" ", type:"text" , value:"", quotes:false}]}
-                    submitLabel="Create"  />
-
-                <RenkuCommand
-                    id="datasetadd"
-                    name="Add Dataset"
-                    command="renku dataset add"
-                    terminalManager={this.props.terminalManager}
-                    arguments={[{id:"datasetname", label:"Dataset Name", arg:" ", type:"text" , value:"", quotes:false},
-                                {id:"datasetudl", label:"Dataset URL", arg:" ", type:"text" , value:"", quotes:false}]}
-                    submitLabel="Add"  />
-
-
-                <RenkuCommand
                     id="gitlfstrack"
                     name="Git Lfs Track"
                     command="git lfs track"
@@ -112,6 +94,38 @@ class RenkuCommands extends React.Component<IRenkuCommands>{
     };
 } export default RenkuCommands;
 
+class DatasetCommands extends React.Component<IRenkuCommands>{
+
+    constructor(props: IRenkuCommands) {
+        super(props);
+    };
+
+    render() {
+        return (
+            <ul className="p-CommandPalette-content">
+
+                <RenkuCommand
+                    id="datasetcreate"
+                    name="Create Dataset"
+                    command="renku dataset create"
+                    terminalManager={this.props.terminalManager}
+                    arguments={[{id:"datasetname", label:"Dataset Name", arg:" ", type:"text" , value:"", quotes:false}]}
+                    submitLabel="Create"  />
+
+                <RenkuCommand
+                    id="datasetadd"
+                    name="Add Dataset"
+                    command="renku dataset add"
+                    terminalManager={this.props.terminalManager}
+                    arguments={[{id:"datasetname", label:"Dataset Name", arg:" ", type:"text" , value:"", quotes:false},
+                                {id:"datasetudl", label:"Dataset URL", arg:" ", type:"text" , value:"", quotes:false}]}
+                    submitLabel="Add"  />
+
+            </ul>
+        );
+    };
+} export { DatasetCommands };
+
 class GitCommands extends React.Component<IRenkuCommands>{
 
     constructor(props: IRenkuCommands) {
@@ -121,29 +135,37 @@ class GitCommands extends React.Component<IRenkuCommands>{
     render() {
         return (
             <ul className="p-CommandPalette-content">
-                <RenkuCommand
-                    id="gitstatus"
-                    name="Status"
-                    command="git status"
-                    terminalManager={this.props.terminalManager}
-                    arguments={[]}
-                    submitLabel="" />
-
-                <RenkuCommand
+                  <RenkuCommand
                     id="gitaddall"
                     name="Add All (.)"
                     command="git add ."
                     terminalManager={this.props.terminalManager}
                     arguments={[]}
-                    submitLabel=""  />   
-
+                    submitLabel=""  />  
+                
+                <RenkuCommand
+                    id="gitcleani"
+                    name="Clean -i (use carefully)"
+                    command="git clean -i"
+                    terminalManager={this.props.terminalManager}
+                    arguments={[]}
+                    submitLabel="" />
+                
                 <RenkuCommand
                     id="gitcommit"
                     name="Commit"
                     command="git commit"
                     terminalManager={this.props.terminalManager}
                     arguments={[{id:"message", label:"Message", arg:"-m", type:"text" , value:"", quotes:true}]}
-                    submitLabel="Commit"  />
+                    submitLabel="Commit"  /> 
+                
+                <RenkuCommand
+                    id="gitpull"
+                    name="Pull"
+                    command="git pull"
+                    terminalManager={this.props.terminalManager}
+                    arguments={[]}
+                    submitLabel=""  />
 
                 <RenkuCommand
                     id="gitpush"
@@ -152,6 +174,22 @@ class GitCommands extends React.Component<IRenkuCommands>{
                     terminalManager={this.props.terminalManager}
                     arguments={[]}
                     submitLabel=""  />
+                
+                <RenkuCommand
+                    id="gitpushforcewithlease"
+                    name="Push (force with lease)"
+                    command="git push --force-with-lease"
+                    terminalManager={this.props.terminalManager}
+                    arguments={[]}
+                    submitLabel=""  />
+
+                <RenkuCommand
+                    id="gitstatus"
+                    name="Status"
+                    command="git status"
+                    terminalManager={this.props.terminalManager}
+                    arguments={[]}
+                    submitLabel="" />
                 
             </ul>
         );
@@ -172,14 +210,16 @@ class HelpCommands extends React.Component<IRenkuCommands>{
                     name="About Renku"
                     app={this.props.app}
                 />
-                <HelpCommand
-                    id="helpcommand"
-                    name="Nav Bar Help"
-                    app={this.props.app}
-                />
+              
                 <CheatSheetCommand
                     id="cheatsheetcommand"
                     name="Cheat Sheet"
+                    app={this.props.app}
+                />
+
+                <HelpCommand
+                    id="helpcommand"
+                    name="Nav Bar Help"
                     app={this.props.app}
                 />
 
