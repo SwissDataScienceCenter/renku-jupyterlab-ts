@@ -35,23 +35,23 @@ class CheatSheetTab extends React.Component {
                                     </tr>
                                     <tr>
                                         <td><strong>renku --version</strong></td>
-                                        <td>Print version number.</td>
+                                        <td>Print version number</td>
                                     </tr>
                                     <tr>
                                         <td><strong>renku init (inside project path) </strong></td>
                                         <td>This creates a new subdirectory named .renku that contains all the necessary files
-                                    for managing the project configuration.</td>
+                                    for managing the project configuration </td>
                                     </tr>
                                     <tr>
                                         <td><strong>renku init --force</strong></td>
                                         <td>There are situations when the required structure of a Renku project needs to be
                                             recreated or you have an existing Git repository. You can solve these situation by
-                                    simply adding the --force option.</td>
+                                    simply adding the --force option</td>
                                     </tr>
                                     <tr>
                                         <td><strong>renku init --force --external-storage</strong></td>
                                         <td>You can also enable the external storage system for output files, if it was not
-                                    installed previously.</td>
+                                    installed previously</td>
                                     </tr>
                                     <tr>
                                         <td><strong>renku config</strong></td>
@@ -59,7 +59,7 @@ class CheatSheetTab extends React.Component {
                                     </tr>
                                     <tr>
                                         <td><strong>renku dataset create my-dataset</strong></td>
-                                        <td>Creating an empty dataset inside a Renku project.</td>
+                                        <td>Creating an empty dataset inside a Renku project</td>
                                     </tr>
                                     <tr>
                                         <td><strong>renku dataset</strong></td>
@@ -71,27 +71,27 @@ class CheatSheetTab extends React.Component {
                                     </tr>
                                     <tr>
                                         <td><strong>renku dataset add my-dataset http://data-url</strong></td>
-                                        <td>Add data to the dataset.</td>
+                                        <td>Add data to the dataset</td>
                                     </tr>
                                     <tr>
                                         <td><strong>renku dataset add my-dataset git+ssh://host.io/namespace/project.git</strong></td>
-                                        <td>To add data from a git repository, you can specify it via https or git+ssh URL schemes.</td>
+                                        <td>To add data from a git repository, you can specify it via https or git+ssh URL schemes</td>
                                     </tr>
                                     <tr>
                                         <td><strong>renku run</strong></td>
-                                        <td>Track provenance of data created by executing programs. If there were uncommitted changes in the repository, then the renku run command fails. See git status for details.</td>
+                                        <td>Track provenance of data created by executing programs. If there were uncommitted changes in the repository, then the renku run command fails. See git status for details</td>
                                     </tr>
                                     <tr>
                                         <td><strong>renku log</strong></td>
-                                        <td>Show provenance of data created by executing programs.</td>
+                                        <td>Show provenance of data created by executing programs</td>
                                     </tr>
                                     <tr>
                                         <td><strong>renku status</strong></td>
-                                        <td>Show status of data files created in the repository.</td>
+                                        <td>Show status of data files created in the repository</td>
                                     </tr>
                                     <tr>
                                         <td><strong>renku update</strong></td>
-                                        <td>Update outdated files created by the “run” command.</td>
+                                        <td>Update outdated files created by the “run” command</td>
                                     </tr>
                                 </tbody>
                             </table>

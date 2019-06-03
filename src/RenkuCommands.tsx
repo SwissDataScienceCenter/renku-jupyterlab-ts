@@ -36,9 +36,9 @@ class RenkuCommands extends React.Component<IRenkuCommands>{
                     command="renku"
                     terminalManager={this.props.terminalManager}
                     arguments={[{id:"help", label:"Help", arg:"--help", type:"checkbox" , value:false, quotes:false},
-                                {id:"version", label:"Version", arg:"--version", type:"checkbox" , value:false, quotes:false}]} 
+                                {id:"version", label:"Version", arg:"--version", type:"checkbox" , value:false, quotes:false}]}
                     submitLabel="Run" />
-                
+
                 <RenkuCommand
                     id="renkustatus"
                     name="Renku Status"
@@ -75,10 +75,10 @@ class RenkuCommands extends React.Component<IRenkuCommands>{
 
                 <RenkuCommand
                     id="gitlfstrack"
-                    name="Git Lfs Track"
+                    name="Git LFS Track"
                     command="git lfs track"
                     terminalManager={this.props.terminalManager}
-                    arguments={[]} 
+                    arguments={[]}
                     submitLabel="" />
 
                 {/* <RenkuCommand
@@ -88,7 +88,7 @@ class RenkuCommands extends React.Component<IRenkuCommands>{
                     terminalManager={this.props.terminalManager}
                     arguments={[{id:"url", label:"Url", arg:"-h", type:"text" , value:""},
                         {id:"doi",  label:"DOI", arg:"-h", type:"text" , value:""}]} /> */}
-                    
+
             </ul>
         );
     };
@@ -141,8 +141,8 @@ class GitCommands extends React.Component<IRenkuCommands>{
                     command="git add ."
                     terminalManager={this.props.terminalManager}
                     arguments={[]}
-                    submitLabel=""  />  
-                
+                    submitLabel=""  />
+
                 <RenkuCommand
                     id="gitcleani"
                     name="Clean -i (use carefully)"
@@ -150,15 +150,15 @@ class GitCommands extends React.Component<IRenkuCommands>{
                     terminalManager={this.props.terminalManager}
                     arguments={[]}
                     submitLabel="" />
-                
+
                 <RenkuCommand
                     id="gitcommit"
                     name="Commit"
                     command="git commit"
                     terminalManager={this.props.terminalManager}
                     arguments={[{id:"message", label:"Message", arg:"-m", type:"text" , value:"", quotes:true}]}
-                    submitLabel="Commit"  /> 
-                
+                    submitLabel="Commit"  />
+
                 <RenkuCommand
                     id="gitpull"
                     name="Pull"
@@ -174,7 +174,7 @@ class GitCommands extends React.Component<IRenkuCommands>{
                     terminalManager={this.props.terminalManager}
                     arguments={[]}
                     submitLabel=""  />
-                
+
                 <RenkuCommand
                     id="gitpushforcewithlease"
                     name="Push (force with lease)"
@@ -190,7 +190,7 @@ class GitCommands extends React.Component<IRenkuCommands>{
                     terminalManager={this.props.terminalManager}
                     arguments={[]}
                     submitLabel="" />
-                
+
             </ul>
         );
     };
@@ -210,7 +210,7 @@ class HelpCommands extends React.Component<IRenkuCommands>{
                     name="About Renku"
                     app={this.props.app}
                 />
-              
+
                 <CheatSheetCommand
                     id="cheatsheetcommand"
                     name="Cheat Sheet"
