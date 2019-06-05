@@ -142,14 +142,14 @@ class GitCommands extends React.Component<IRenkuCommands>{
                     terminalManager={this.props.terminalManager}
                     arguments={[]}
                     submitLabel=""  />
-
+{/* TODO: Reactivate this once we have some confirmation built in.
                 <RenkuCommand
                     id="gitcleani"
                     name="Clean -i (use carefully)"
                     command="git clean -i"
                     terminalManager={this.props.terminalManager}
                     arguments={[]}
-                    submitLabel="" />
+                    submitLabel="" /> */}
 
                 <RenkuCommand
                     id="gitcommit"
@@ -174,14 +174,14 @@ class GitCommands extends React.Component<IRenkuCommands>{
                     terminalManager={this.props.terminalManager}
                     arguments={[]}
                     submitLabel=""  />
-
+{/* TODO: Reactivate this once we have some confirmation built in.
                 <RenkuCommand
                     id="gitpushforcewithlease"
                     name="Push (force with lease)"
                     command="git push --force-with-lease"
                     terminalManager={this.props.terminalManager}
                     arguments={[]}
-                    submitLabel=""  />
+                    submitLabel=""  /> */}
 
                 <RenkuCommand
                     id="gitstatus"
