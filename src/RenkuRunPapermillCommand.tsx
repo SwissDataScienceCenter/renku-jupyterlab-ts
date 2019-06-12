@@ -2,7 +2,6 @@ import * as React from 'react';
 import '../style/index.css';
 import RenkuTerminalManager from './RenkuTerminalManager';
 import { INotebookTracker, NotebookPanel } from '@jupyterlab/notebook';
-import { PathExt } from '@jupyterlab/coreutils';
 import { JupyterLab } from '@jupyterlab/application';
 import { ICellModel } from '@jupyterlab/cells';
 import { IIterator } from '@phosphor/algorithm';
@@ -70,13 +69,11 @@ class RenkuPapermillCommand extends React.Component<IRenkuPapermillCommand, RunP
     renkuRunPapermill(params: string) {
         this.setState({ firstClick: true, show: true });
         const nbWidget: NotebookPanel = this.props.app.shell.currentWidget as NotebookPanel;
-        const nbDirname = PathExt.dirname(nbWidget.context.path);
-        if (nbDirname !== '') {
-            this.props.terminalManager.runCommand(`cd ${nbDirname};`);
-        }
-        const nbBasename = PathExt.basename(nbWidget.context.path);
-        let command = `renku run papermill ${nbBasename} ${nbBasename.replace('.ipynb', '.ran.ipynb')} ${params}  \n`
-        this.props.terminalManager.runCommand(command);
+        const path = nbWidget.context.path;
+        this.props.terminalManager.runCommand(`pushd . && cd ${this.props.app.info.directories.serverRoot}`);
+        this.props.terminalManager.runCommand(`git add ${path} && git commit -m"renku: snapshot ${path} before running"`);
+        this.props.terminalManager.runCommand(`renku run papermill ${path} ${path.replace('.ipynb', '.ran.ipynb')} ${params}`);
+        this.props.terminalManager.runCommand(`popd`);
     }
 
     hasParameters() {
@@ -103,18 +100,11 @@ class RenkuPapermillCommand extends React.Component<IRenkuPapermillCommand, RunP
                     this.showAndHide();
                 }
             } else {
-                const nbWidget: NotebookPanel = this.props.app.shell.currentWidget as NotebookPanel;
                 this.processParameters();
                 if (this.state.hasParameters || this.hasParameters()) {
                     this.showAndHide();
                 } else {
-                    const nbDirname = PathExt.dirname(nbWidget.context.path);
-                    if (nbDirname !== '') {
-                        this.props.terminalManager.runCommand(`cd ${nbDirname};`);
-                    }
-                    const nbBasename = PathExt.basename(nbWidget.context.path);
-                    let command = `renku run papermill ${nbBasename} ${nbBasename.replace('.ipynb', '.ran.ipynb')}\n`
-                    this.props.terminalManager.runCommand(command);
+                    this.renkuRunPapermill("");
                 }
             }
         }
