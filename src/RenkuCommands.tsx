@@ -55,13 +55,14 @@ class RenkuCommands extends React.Component<IRenkuCommands>{
                     arguments={[]}
                     submitLabel=""  />
 
+                {/* Reactivate this once we have the ability to set parameters
                 <RenkuCommand
                     id="renkurun"
                     name="Renku Run"
                     command="renku run"
                     terminalManager={this.props.terminalManager}
                     arguments={[]}
-                    submitLabel=""  />
+                    submitLabel=""  /> */}
 
                 <RenkuPapermillCommand
                     id="renkupapermill"
