@@ -169,7 +169,7 @@ class RenkuPapermillCommand extends React.Component<IRenkuPapermillCommand, RunP
                         <div>Parameters (From Cell)
                     <textarea id="parameters-raw-text" rows={this.state.rows + 1} readOnly={true} value={this.state.paramsValueUnprocessed} disabled={!this.props.enabled} className={"jp-textEditorTabBar rk-innerTabTextArea"} />
                         </div>
-                        <div>Parameters (Processed - to edit)
+                        <div>Parameters (Edit to Change)
                     <textarea id="parameters-processed-text" rows={this.state.rows + 1} value={this.state.paramsValueProcessed} disabled={!this.props.enabled} className={"jp-textEditorTabBar rk-innerTabTextArea"} onChange={e => this.handleTextArgChange(e)} />
                         </div>
                         <button onClick={this.handleSecondClick} >Run</button>
