@@ -6,11 +6,15 @@
     "moduleResolution": "node",
     "noEmitOnError": true,
     "noUnusedLocals": true,
-    "outDir": "./lib",
-    "target": "es2015",
+    "outDir": "lib",
+    "rootDir": "src",
     "strict": true,
     "strictNullChecks": false,
+    "target": "es2015",
+    "jsx": "react",
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
     "types": []
   },
-  "include": ["src/*"]
+  "include": ["src/**/*"]
 }
