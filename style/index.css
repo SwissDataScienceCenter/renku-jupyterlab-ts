@@ -71,7 +71,6 @@
 }
 
 .rk-innerTabElement{
-    padding-right: 24px;
     background: var(--jp-layout-color2);
     border-top: var(--jp-border-width) solid var(--jp-border-color0);
     border-bottom: var(--jp-border-width) solid var(--jp-border-color0);
@@ -122,8 +121,7 @@
 }
 
 .rk-argumentsForm{
-    padding-right:8px;
-    padding-left:8px;
+    padding: 0;
     font-weight:100;
     width: 100%;
 }
@@ -149,7 +147,16 @@
     background-color: #262261;
 }
 
+.rk-argumentsForm button:disabled{
+    background-color: #cccccc;
+}
+
 .rk-argumentsForm label{
     color: var(--jp-ui-font-color1);
     font-size: var(--jp-ui-font-size1);
+}
+
+.rk-argumentsForm .error-text{
+    color: #F44336;
+    font-style: italic;
 }

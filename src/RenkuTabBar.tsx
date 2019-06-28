@@ -8,6 +8,7 @@ import '../style/index.css';
 
 import { JupyterLab } from '@jupyterlab/application';
 import { INotebookTracker } from '@jupyterlab/notebook';
+import { DocumentManager } from '@jupyterlab/docmanager';
 import RenkuCommands, { HelpCommands } from './RenkuCommands';
 import { GitCommands, DatasetCommands } from './RenkuCommands';
 import RenkuTerminalManager from './RenkuTerminalManager';
@@ -16,6 +17,7 @@ export interface IRenkuTabBar {
   app: JupyterLab;
   notebooks: INotebookTracker;
   terminalManager : RenkuTerminalManager;
+  docManager: DocumentManager;
 };
 
 class RenkuTabBar extends TabBar<void>{
@@ -62,7 +64,8 @@ class RenkuTabBar extends TabBar<void>{
         {
           app: this.props.app,
           notebooks: this.props.notebooks,
-          terminalManager: this.props.terminalManager
+          terminalManager: this.props.terminalManager,
+          docManager: this.props.docManager
         }),
       document.getElementById('renku-tab-content')
     );

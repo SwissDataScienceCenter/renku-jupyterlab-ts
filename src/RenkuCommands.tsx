@@ -8,11 +8,14 @@ import { INotebookTracker } from '@jupyterlab/notebook';
 import AboutCommand from './help/AboutCommand';
 import HelpCommand from './help/HelpCommand';
 import CheatSheetCommand from './help/CheatSheetCommand';
+import { DocumentManager } from '@jupyterlab/docmanager';
+import { RenkuGraph } from './RenkuGraph'
 
 export interface IRenkuCommands {
     app: JupyterLab;
     notebooks: INotebookTracker;
     terminalManager: RenkuTerminalManager;
+    docManager?: DocumentManager;
 };
 
 class RenkuCommands extends React.Component<IRenkuCommands>{
@@ -90,6 +93,10 @@ class RenkuCommands extends React.Component<IRenkuCommands>{
                     arguments={[{id:"url", label:"Url", arg:"-h", type:"text" , value:""},
                         {id:"doi",  label:"DOI", arg:"-h", type:"text" , value:""}]} /> */}
 
+                <RenkuGraph
+                    app={this.props.app}
+                    terminalManager={this.props.terminalManager}
+                    docManager={this.props.docManager} />
             </ul>
         );
     };

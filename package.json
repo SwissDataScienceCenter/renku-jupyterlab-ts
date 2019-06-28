@@ -34,6 +34,8 @@
   "dependencies": {
     "@jupyterlab/application": "^0.19.1",
     "@jupyterlab/apputils": "^0.19.1",
+    "@jupyterlab/docmanager": "^0.19.1",
+    "@jupyterlab/filebrowser": "^0.19.4",
     "@jupyterlab/notebook": "^0.19.2",
     "@jupyterlab/terminal": "^0.19.1",
     "@types/react-dom": "^16.4.2",
