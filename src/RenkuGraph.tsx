@@ -5,6 +5,7 @@ import { JupyterLab } from '@jupyterlab/application';
 import { MessageLoop } from '@phosphor/messaging';
 import { FileBrowser, DirListing } from '@jupyterlab/filebrowser';
 import { DocumentManager } from '@jupyterlab/docmanager';
+import { Dialog, showDialog } from '@jupyterlab/apputils';
 
 export interface IRenkuGraphProps {
     app: JupyterLab;
@@ -21,6 +22,7 @@ interface IRenkuGraphState {
 }
 
 const RENKU_GRAPH_PATH = ".git/renkuLineage.svg";
+const GRAPH_THRESHOLD_SIZE = 600; // the empty file size is 575
 
 class RenkuGraph extends React.Component<IRenkuGraphProps, IRenkuGraphState> {
     constructor(props: IRenkuGraphProps) {
@@ -114,9 +116,27 @@ class RenkuGraph extends React.Component<IRenkuGraphProps, IRenkuGraphState> {
         // check if the file has already been created
         this.props.docManager.rename(RENKU_GRAPH_PATH, RENKU_GRAPH_PATH)
             .then(data => { 
-                const graph = this.props.docManager.open(RENKU_GRAPH_PATH);
-                this.props.app.shell.addToMainArea(graph);
-                this.setState({ computing: false });
+                const imageFile = data as any;
+                if (imageFile && imageFile.size && imageFile.size < GRAPH_THRESHOLD_SIZE) {
+                    const body = 'No lineage information for "' + imageFile.path + '".' +
+                        '\n' +'Please select another file.';
+                    // TODO: This would be a more elegant Phosphorjs solution, but the compiler complains
+                    // const body = h.div(
+                    //     h.p('No lineage information for "' + imageFile.path + '".'),
+                    //     h.p('Please select another file.')
+                    // );
+                    const options = {
+                        title: "Lineage not available",
+                        body,
+                        buttons: [Dialog.okButton({ label: 'Dismiss' })]
+                    };
+                    showDialog(options); //.then(() => {});
+                }
+                else {
+                    const graph = this.props.docManager.openOrReveal(RENKU_GRAPH_PATH);
+                    this.props.app.shell.addToMainArea(graph);
+                }
+                this.setState({ computing: false });           
             })
             .catch(error => {
                 // timeout after a few loops
