@@ -9,13 +9,15 @@ import AboutCommand from './help/AboutCommand';
 import HelpCommand from './help/HelpCommand';
 import CheatSheetCommand from './help/CheatSheetCommand';
 import { DocumentManager } from '@jupyterlab/docmanager';
-import { RenkuGraph } from './RenkuGraph'
+import { RenkuGraph } from './RenkuGraph';
+import { IFileBrowserFactory } from '@jupyterlab/filebrowser';
 
 export interface IRenkuCommands {
     app: JupyterLab;
     notebooks: INotebookTracker;
     terminalManager: RenkuTerminalManager;
     docManager?: DocumentManager;
+    factoryBrowserFactory: IFileBrowserFactory;
 };
 
 class RenkuCommands extends React.Component<IRenkuCommands>{
@@ -96,7 +98,8 @@ class RenkuCommands extends React.Component<IRenkuCommands>{
                 <RenkuGraph
                     app={this.props.app}
                     terminalManager={this.props.terminalManager}
-                    docManager={this.props.docManager} />
+                    docManager={this.props.docManager}
+                    factoryBrowserFactory={this.props.factoryBrowserFactory} />
             </ul>
         );
     };

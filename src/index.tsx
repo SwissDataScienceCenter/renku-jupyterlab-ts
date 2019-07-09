@@ -2,11 +2,11 @@ import RenkuTabBar from './RenkuTabBar';
 import RenkuTerminalManager from './RenkuTerminalManager';
 import { ILayoutRestorer, JupyterLabPlugin, JupyterLab } from '@jupyterlab/application';
 import { INotebookTracker } from '@jupyterlab/notebook';
-import { ITerminalTracker } from '@jupyterlab/terminal';
 import { DocumentManager } from '@jupyterlab/docmanager';
 import { DocumentWidget } from '@jupyterlab/docregistry';
+import { IFileBrowserFactory } from '@jupyterlab/filebrowser';
 
-function activate(app: JupyterLab, restorer: ILayoutRestorer, notebooks: INotebookTracker) {
+function activate(app: JupyterLab, restorer: ILayoutRestorer, notebooks: INotebookTracker, factory: IFileBrowserFactory) {
   const { shell } = app;
   const terminalManager = new RenkuTerminalManager({
     app: app,
@@ -23,7 +23,8 @@ function activate(app: JupyterLab, restorer: ILayoutRestorer, notebooks: INotebo
     app: app,
     notebooks: notebooks,
     terminalManager: terminalManager,
-    docManager: docManager
+    docManager: docManager,
+    factoryBrowserFactory: factory
   });
 
   shell.addToLeftArea(tabs, { rank: 600 });
@@ -32,7 +33,7 @@ function activate(app: JupyterLab, restorer: ILayoutRestorer, notebooks: INotebo
 const extension: JupyterLabPlugin<void> = {
   id: 'renku-jupyterlab-ts',
   autoStart: true,
-  requires: [INotebookTracker, ITerminalTracker, ILayoutRestorer],
+  requires: [ILayoutRestorer, INotebookTracker, IFileBrowserFactory],
   activate: activate
 };
 

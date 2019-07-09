@@ -12,12 +12,15 @@ import { DocumentManager } from '@jupyterlab/docmanager';
 import RenkuCommands, { HelpCommands } from './RenkuCommands';
 import { GitCommands, DatasetCommands } from './RenkuCommands';
 import RenkuTerminalManager from './RenkuTerminalManager';
+import { IFileBrowserFactory } from '@jupyterlab/filebrowser';
+
 
 export interface IRenkuTabBar {
   app: JupyterLab;
   notebooks: INotebookTracker;
   terminalManager : RenkuTerminalManager;
   docManager: DocumentManager;
+  factoryBrowserFactory: IFileBrowserFactory;
 };
 
 class RenkuTabBar extends TabBar<void>{
@@ -54,7 +57,8 @@ class RenkuTabBar extends TabBar<void>{
         {
           app: this.props.app,
           notebooks: this.props.notebooks,
-          terminalManager: this.props.terminalManager
+          terminalManager: this.props.terminalManager,
+          factoryBrowserFactory: this.props.factoryBrowserFactory
         }),
       document.getElementById('git-tab-content')
     );
@@ -65,7 +69,8 @@ class RenkuTabBar extends TabBar<void>{
           app: this.props.app,
           notebooks: this.props.notebooks,
           terminalManager: this.props.terminalManager,
-          docManager: this.props.docManager
+          docManager: this.props.docManager,
+          factoryBrowserFactory: this.props.factoryBrowserFactory
         }),
       document.getElementById('renku-tab-content')
     );
@@ -75,7 +80,8 @@ class RenkuTabBar extends TabBar<void>{
         {
           app: this.props.app,
           notebooks: this.props.notebooks,
-          terminalManager: this.props.terminalManager
+          terminalManager: this.props.terminalManager,
+          factoryBrowserFactory: this.props.factoryBrowserFactory
         }),
       document.getElementById('dataset-tab-content')
     );
@@ -85,10 +91,11 @@ class RenkuTabBar extends TabBar<void>{
         {
           app: this.props.app,
           notebooks: this.props.notebooks,
-          terminalManager: this.props.terminalManager
+          terminalManager: this.props.terminalManager,
+          factoryBrowserFactory: this.props.factoryBrowserFactory
         }),
       document.getElementById('renku-tab-help-content')
     );
-    
+
   };
 } export default RenkuTabBar;

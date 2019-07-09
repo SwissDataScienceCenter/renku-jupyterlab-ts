@@ -3,14 +3,16 @@ import * as React from 'react';
 import RenkuTerminalManager from './RenkuTerminalManager';
 import { JupyterLab } from '@jupyterlab/application';
 import { MessageLoop } from '@phosphor/messaging';
-import { FileBrowser, DirListing } from '@jupyterlab/filebrowser';
+import { DirListing } from '@jupyterlab/filebrowser';
 import { DocumentManager } from '@jupyterlab/docmanager';
 import { Dialog, showDialog } from '@jupyterlab/apputils';
+import { IFileBrowserFactory } from '@jupyterlab/filebrowser';
 
 export interface IRenkuGraphProps {
     app: JupyterLab;
     terminalManager: RenkuTerminalManager;
     docManager: DocumentManager;
+    factoryBrowserFactory: IFileBrowserFactory;
 };
 
 interface IRenkuGraphState {
@@ -36,14 +38,7 @@ class RenkuGraph extends React.Component<IRenkuGraphProps, IRenkuGraphState> {
         }
 
         // create hook to get selected file data
-        let fileBrowser;
-        const leftWidgets = this.props.app.shell.widgets("left");
-        for (let current = leftWidgets.next(); current !== undefined; current = leftWidgets.next()) {
-            if (current.id === "filebrowser") {
-                fileBrowser = current as FileBrowser;
-                break;
-            }
-        }
+        let fileBrowser = this.props.factoryBrowserFactory.tracker.currentWidget;
         const dirlisting = fileBrowser["_listing"] as DirListing;
         this.createFileBrowserHook(dirlisting);
 
@@ -60,7 +55,7 @@ class RenkuGraph extends React.Component<IRenkuGraphProps, IRenkuGraphState> {
     activateFileBrowser() {
         if (!this.state.computing) {
             this.props.app.shell.activateById("filebrowser");
-        } 
+        }
     }
 
     createFileBrowserHook(dirListing: DirListing) {
@@ -111,11 +106,11 @@ class RenkuGraph extends React.Component<IRenkuGraphProps, IRenkuGraphState> {
     buildFullPath(partialPath: string) {
         return this.props.app.info.directories.serverRoot + "/" + partialPath;
     }
- 
+
     openGraphLoop(path: string) {
         // check if the file has already been created
         this.props.docManager.rename(RENKU_GRAPH_PATH, RENKU_GRAPH_PATH)
-            .then(data => { 
+            .then(data => {
                 const imageFile = data as any;
                 if (imageFile && imageFile.size && imageFile.size < GRAPH_THRESHOLD_SIZE) {
                     const body = 'No lineage information for "' + imageFile.path + '".' +
@@ -136,7 +131,7 @@ class RenkuGraph extends React.Component<IRenkuGraphProps, IRenkuGraphState> {
                     const graph = this.props.docManager.openOrReveal(RENKU_GRAPH_PATH);
                     this.props.app.shell.addToMainArea(graph);
                 }
-                this.setState({ computing: false });           
+                this.setState({ computing: false });
             })
             .catch(error => {
                 // timeout after a few loops
@@ -186,7 +181,7 @@ class RenkuGraph extends React.Component<IRenkuGraphProps, IRenkuGraphState> {
                     </div>
                 </li>
             </div>
-            
+
         ];
     }
 } export { RenkuGraph };
