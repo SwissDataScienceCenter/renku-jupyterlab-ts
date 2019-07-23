@@ -1,48 +1,25 @@
-# -*- coding: utf-8 -*-
-#
-# Copyright 2018 - Swiss Data Science Center (SDSC)
-# A partnership between École Polytechnique Fédérale de Lausanne (EPFL) and
-# Eidgenössische Technische Hochschule Zürich (ETHZ).
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 notifications:
   email: false
-
 language: node_js
-
 node_js:
-  - "8"
-  - "10"
-
+- '8'
+- '10'
 cache: yarn
-
 install: yarn
-
 script:
-  - yarn install
-  - yarn lint
-
+- yarn install
+- yarn lint
 jobs:
   include:
-    - stage: npm release
-      if: tag IS present
-      node_js: "8"
-      script: yarn build
-      deploy:
-        provider: npm
-        email: "$NPM_EMAIL"
-        api_key: "$NPM_TOKEN"
-        skip_cleanup: true
-        on:
-          tags: true
+  - stage: npm release
+    if: tag IS present
+    node_js: '8'
+    script: yarn build
+    deploy:
+      provider: npm
+      email: "$NPM_EMAIL"
+      api_key:
+        secure: LQVoQuUin+3CiHPbCUaHb6l38rLDemkqFF4PoVJZNym0zv1WPuGPErOxIEcID/ncONjdKgZh1ZmV8Y9YF/PbHvGwx18W0UKu3fHewMcJjd0rlGSFBsYHY33A2aAdP86cbmQ19mkdQSFrEB2vDhE6m4yYmoQCWtUg1LLzVg2qFTX625XQ3FFxtmDESMJd2z/9TxOcmrBbPw78sqq4XjYw4qTdxGNGfovzYZeMyTtMTZCzimFnpC/serlL5SCgW/ELMslO5jQKK7+TbpikvygwHfTRez+nmuOGL0ARioRTM9bP1/1UZtSBUHFUDtLFLw45PkDmYcoH5i04iI7peh2yl4nEFfmntpl8eVBGFHDCyfpD8SGpfP6Cv0CWjRULcOgrRz92aupMzPwbse4QkozV9iicNa2lUQ/WV8/AJWML24phRLNXm2fNcb2q+5pTNRHq7oUclinwdxJUw28161LwyF4YQsNd6ixNhMrxAZAWueyboOZalXkMV7mcIe8tY52JYjzib36JRkAVDBshbcZZJ3zgG+NbBeghKjtNTR0xiBGjEvbcM10J4WNzM/RTlgbZheV0KNOrdMabM9HwShBV+gSAVq6SF0AM/lKevQsKUGm39rmnlzOMEYVk9SUUOLdUg7fqJHI1YGrsPbeIZW4wGFeJ7bOe8rj9sb8AlUfW0ew=
+      skip_cleanup: true
+      on:
+        tags: true
