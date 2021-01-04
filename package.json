@@ -1,65 +1,91 @@
 {
-  "name": "@renku/renku-jupyterlab-ts",
-  "version": "0.2.0",
-  "description": "A Renku extension for JupyterLab.",
+  "name": "jl-renku",
+  "version": "0.1.0",
+  "description": "A JupyterLab extension for Renku.",
   "keywords": [
     "jupyter",
     "jupyterlab",
     "jupyterlab-extension"
   ],
-  "homepage": "https://github.com/SwissDataScienceCenter/renku-jupyterlab-ts",
+  "homepage": "https://github.com/SwissDataScienceCenter/renku-jupyterlab-ts/",
   "bugs": {
     "url": "https://github.com/SwissDataScienceCenter/renku-jupyterlab-ts/issues"
   },
-  "license": "Apache-2.0",
-  "author": "Renku team @ Swiss Data Science Center",
+  "license": "BSD-3-Clause",
+  "author": "Swiss Data Science Center",
   "files": [
     "lib/**/*.{d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}",
     "style/**/*.{css,eot,gif,html,jpg,json,png,svg,woff2,ttf}"
   ],
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "style": "style/index.css",
   "repository": {
     "type": "git",
     "url": "https://github.com/SwissDataScienceCenter/renku-jupyterlab-ts.git"
   },
   "scripts": {
-    "build": "tsc",
-    "clean": "rimraf lib",
-    "lint": "node_modules/eslint/bin/eslint.js src/**/* ",
-    "lint-fix": "node_modules/eslint/bin/eslint.js src/ --fix",
-    "watch": "tsc -w",
-    "prepare": "npm run clean && npm run build"
+    "build": "jlpm run build:lib && jlpm run build:labextension:dev",
+    "build:prod": "jlpm run build:lib && jlpm run build:labextension",
+    "build:labextension": "jupyter labextension build .",
+    "build:labextension:dev": "jupyter labextension build --development True .",
+    "build:lib": "tsc",
+    "clean": "jlpm run clean:lib",
+    "clean:lib": "rimraf lib tsconfig.tsbuildinfo",
+    "clean:labextension": "rimraf jl-renku/labextension",
+    "clean:all": "jlpm run clean:lib && jlpm run clean:labextension",
+    "eslint": "eslint . --ext .ts,.tsx --fix",
+    "eslint:check": "eslint . --ext .ts,.tsx",
+    "install:extension": "jupyter labextension develop --overwrite .",
+    "prepare": "jlpm run clean && jlpm run build:prod",
+    "watch": "run-p watch:src watch:labextension",
+    "watch:src": "tsc -w",
+    "watch:labextension": "jupyter labextension watch ."
   },
   "dependencies": {
-    "@jupyterlab/application": "^0.19.1",
-    "@jupyterlab/apputils": "^0.19.1",
-    "@jupyterlab/docmanager": "^0.19.1",
-    "@jupyterlab/filebrowser": "^0.19.4",
-    "@jupyterlab/notebook": "^0.19.2",
-    "@jupyterlab/terminal": "^0.19.1",
-    "@types/react-dom": "^16.4.2",
-    "react-dom": "~16.4.0"
+    "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "@fortawesome/react-fontawesome": "^0.1.13",
+    "@jupyterlab/application": "^3.0.0",
+    "@jupyterlab/apputils": "^3.0.0",
+    "@jupyterlab/coreutils": "^5.0.0",
+    "@jupyterlab/mainmenu": "^3.0.0",
+    "@jupyterlab/services": "^6.0.0",
+    "@jupyterlab/translation": "^3.0.0",
+    "@jupyterlab/ui-components": "^3.0.0",
+    "@lumino/widgets": "^1.17.0",
+    "react-clipboard.js": "^2.0.16"
   },
   "devDependencies": {
-    "eslint": "^5.15.3",
-    "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-node": "^8.0.1",
-    "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-react": "^7.12.4",
-    "eslint-plugin-standard": "^4.0.0",
-    "rimraf": "^2.6.1",
-    "typescript": "~3.1.1",
-    "typescript-eslint-parser": "^21.0.0"
+    "@jupyterlab/builder": "^3.0.0",
+    "@typescript-eslint/eslint-plugin": "^2.27.0",
+    "@typescript-eslint/parser": "^2.27.0",
+    "eslint": "^7.5.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.18.3",
+    "eslint-plugin-spellcheck": "0.0.17",
+    "mkdirp": "^1.0.3",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.19.0",
+    "rimraf": "^3.0.2",
+    "typescript": "~4.0.3"
   },
-  "resolutions": {
-    "@types/react": "^16.4.2"
-  },
+  "sideEffects": [
+    "style/*.css"
+  ],
   "jupyterlab": {
-    "extension": true
-  },
-  "publishConfig": {
-    "access": "public"
+    "discovery": {
+      "server": {
+        "managers": [
+          "pip"
+        ],
+        "base": {
+          "name": "jl-renku"
+        }
+      }
+    },
+    "extension": true,
+    "outputDir": "jl-renku/labextension"
   }
 }
