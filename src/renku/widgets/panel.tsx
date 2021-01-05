@@ -26,7 +26,9 @@ const RenkuPanel: FunctionComponent<IPanelProps> = ( { commands = null } ): JSX.
 
   return <div>
     <div>
-      <h3>Renku</h3>
+      <header>
+        <h2>Renku</h2>
+      </header>
     </div>
     <div>
       <table>

@@ -4,6 +4,19 @@
   font-size: var(--jp-ui-font-size1);
 }
 
+.jp-RenkuPanel div header {
+  border-bottom: var(--jp-border-width) solid var(--jp-border-color2)
+}
+
+.jp-RenkuPanel div header h2 {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: var(--jp-ui-font-size0);
+  padding: 8px 8px 8px 12px;
+  margin: 0;
+}
+
 .jp-RenkuPanel div {
   display: flex;
   flex-direction: column;
@@ -13,12 +26,15 @@
 /* Table rows on the RenkuPanel widget are basically buttons. */
 .jp-RenkuPanel table {
   border-collapse: collapse;
-  font-size: var(--jp-ui-font-size2);
+  font-size: var(--jp-ui-font-size1);
   width: 100%;
 }
 
 .jp-RenkuPanel table tbody tr {
-  border-bottom: 1px solid gray;
+  padding: 0 4px 0 4px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .jp-RenkuPanel table tbody tr:hover {
