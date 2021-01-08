@@ -227,11 +227,9 @@ const LearnMore = (): JSX.Element => {
  */
 const CheatSheet = (): JSX.Element => {
   return <div className="container">
-    <div className="row">
-      <div>
-        <h1>Renku Cheat Sheet</h1>
-      </div>
-    </div>
+    <header>
+      <h1>Renku Cheat Sheet</h1>
+    </header>
     <TypicalWorkflow />
     <RunningAndTrackingCommands />
     <SavingProgress />
@@ -252,6 +250,7 @@ class CheatSheetWidget extends ReactWidget {
   constructor() {
     super();
     [
+      "jp-Renku",
       "jp-RenkuCheatSheet"
     ].forEach(c => this.addClass(c));
   }

@@ -43,11 +43,11 @@
   cursor: pointer;
 }
 
-.jp-RenkuCheatSheet {
+.jp-Renku {
   overflow: scroll;
 }
 
-.jp-RenkuCheatSheet div.container {
+.jp-Renku div.container {
   display: flex;
   flex-direction: column;
   min-width: 300px;
@@ -55,24 +55,28 @@
   color: var(--jp-ui-font-color1);
 }
 
-.jp-RenkuCheatSheet div.row {
+.jp-Renku div header {
+  border-bottom: var(--jp-border-width) solid var(--jp-border-color2)
+}
+
+.jp-Renku div.row {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
 }
 
-.jp-RenkuCheatSheet div.row div {
+.jp-Renku div.row div {
   flex-basis: 0;
   flex-grow: 1;
   padding: 0 10px 5px 0;
 }
 
-.jp-RenkuCheatSheet div.col {
+.jp-Renku div.col {
   display: flex;
   flex-flow: column wrap;
 }
 
-.jp-RenkuCheatSheet a.doc {
+.jp-Renku a.doc {
   font-style: italic;
   text-decoration: underline;
 }
