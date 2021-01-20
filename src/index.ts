@@ -27,7 +27,7 @@ const extension: JupyterFrontEndPlugin<void> = {
     palette: ICommandPalette
   ) => {
     // DEBUG
-    // eslint-disable-next-line
+    //
     console.log("JupyterLab extension jl-renku is activated!");
 
     const renkuMain = CreateRenkuPanelWidget(app.commands);
@@ -44,10 +44,9 @@ const extension: JupyterFrontEndPlugin<void> = {
     // Add the command to the palette.
     palette.addItem({ command: CommandIds.renkuMain, category: "Renku" });
 
-    requestAPI<any>("get_example")
+    requestAPI<any>("get_session_info")
       .then(data => {
         // DEBUG
-        // eslint-disable-next-line
         console.log(data);
       })
       .catch(reason => {

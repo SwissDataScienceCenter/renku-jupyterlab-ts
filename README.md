@@ -18,7 +18,7 @@ for the frontend extension.
 To install from pypi, run the following command (this will fail at the moment, since jl-renku has not been published to pypi yet):
 
 ```bash
-pip install jl-renku
+pip install jl_renku
 ```
 
 If you have NodeJS available, you can also install from the repo:

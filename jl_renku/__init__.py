@@ -22,7 +22,7 @@ from .handlers import setup_handlers
 
 def _jupyter_server_extension_points():
     return [{
-        "module": "jl-renku"
+        "module": "jl_renku"
     }]
 
 
@@ -35,5 +35,5 @@ def _load_jupyter_server_extension(server_app):
         JupyterLab application instance
     """
     setup_handlers(server_app.web_app)
-    server_app.log.info("Registered HelloWorld extension at URL path /jl-renku")
+    server_app.log.info("Registered HelloWorld extension at URL path /jl_renku")
 
