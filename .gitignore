@@ -1,3 +1,6 @@
+# Avoid accidentally adding the unzipped fixture
+tests/fixtures/jl-extension-test-0-12/
+
 *.bundle.*
 lib/
 node_modules/

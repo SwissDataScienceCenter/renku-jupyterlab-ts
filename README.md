@@ -8,10 +8,9 @@ This extension is composed of a Python package named `jl-renku`
 for the server extension and a NPM package named `jl-renku`
 for the frontend extension.
 
-
 ## Requirements
 
-* JupyterLab >= 3.0
+- JupyterLab >= 3.0
 
 ## Install
 
@@ -26,7 +25,6 @@ If you have NodeJS available, you can also install from the repo:
 ```bash
 pip install .
 ```
-
 
 ## Troubleshoot
 
@@ -43,7 +41,6 @@ the frontend extension, check the frontend extension is installed:
 ```bash
 jupyter labextension list
 ```
-
 
 ## Contributing
 
@@ -96,6 +93,24 @@ By default, the `jlpm run build` command generates the source maps for this exte
 ```bash
 jupyter lab build --minimize=False
 ```
+
+### Building
+
+To build the extension for deployment as a python package, first make sure `jupyter_packaging` is installed. If not, install it with
+
+```
+pip install jupyter_packaging
+```
+
+Then you can create a wheel package with
+
+```
+python setup.py bdist_wheel
+```
+
+You will find the package in the `dist/` directory.
+
+[Refer to the JupyterLab documentation](https://jupyterlab.readthedocs.io/en/stable/extension/extension_tutorial.html?highlight=extension#packaging-your-extension) for more detailed instructions.
 
 ### Uninstall
 

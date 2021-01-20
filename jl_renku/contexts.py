@@ -15,23 +15,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-__all__ = ["__version__"]
+import contextlib
+import os
+
+# based on renku-python/renku/core/utils/contexts.py
 
 
-def _fetchVersion():
-    import json
-    import os
-
-    HERE = os.path.abspath(os.path.dirname(__file__))
-
-    for d, _, _ in os.walk(HERE):
-        try:
-            with open(os.path.join(d, "package.json")) as f:
-                return json.load(f)["version"]
-        except FileNotFoundError:
-            pass
-
-    raise FileNotFoundError("Could not find package.json under dir {}".format(HERE))
-
-
-__version__ = _fetchVersion()
+@contextlib.contextmanager
+def chdir(path):
+    """Change the current working directory."""
+    cwd = os.getcwd()
+    os.chdir(path)
+    try:
+        yield
+    finally:
+        os.chdir(cwd)

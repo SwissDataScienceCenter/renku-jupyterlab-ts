@@ -10,8 +10,7 @@ import { ReactWidget } from "@jupyterlab/apputils";
 
 import React, { FunctionComponent } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faTachometerAlt, faTrophy } from "@fortawesome/free-solid-svg-icons";
-import { faTrophy } from "@fortawesome/free-solid-svg-icons";
+import { faTachometerAlt, faTrophy } from "@fortawesome/free-solid-svg-icons";
 
 import { renkuIcon } from "../icons";
 import { CommandIds } from "../commands";
@@ -20,7 +19,7 @@ interface IPanelProps {
   commands: CommandRegistry;
 }
 
-const RenkuPanel: FunctionComponent<IPanelProps> = ( { commands = null } ): JSX.Element => {
+const RenkuPanel: FunctionComponent<IPanelProps> = ( { commands = null }: IPanelProps ): JSX.Element => {
   const executeAction = (name: string): void => {
     commands.execute(name);
   };
@@ -34,10 +33,9 @@ const RenkuPanel: FunctionComponent<IPanelProps> = ( { commands = null } ): JSX.
     <div>
       <table>
         <tbody>
-          { /* Hide podInfo for now */ }
-          {/* <tr onClick={(e): void => executeAction(CommandIds.podInfo)}>
-            <th scope="row"><FontAwesomeIcon icon={faTachometerAlt} /></th><td>Pod Info</td>
-          </tr> */}
+          <tr onClick={(e): void => executeAction(CommandIds.sessionInfo)}>
+            <th scope="row"><FontAwesomeIcon icon={faTachometerAlt} /></th><td>Session Info</td>
+          </tr>
           <tr onClick={(e): void => executeAction(CommandIds.cheatSheet)}>
             <th scope="row"><FontAwesomeIcon icon={faTrophy} /></th><td>Cheat Sheet</td>
           </tr>

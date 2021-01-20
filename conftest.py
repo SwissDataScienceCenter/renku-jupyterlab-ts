@@ -15,28 +15,29 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import json
 
-from jupyter_server.base.handlers import APIHandler
-from jupyter_server.utils import url_path_join
-import tornado
+"""Pytest configuration."""
+import tarfile
+from pathlib import Path
 
-from .core import repo_info
-
-
-class SessionInfoHandler(APIHandler):
-    # The following decorator should be present on all verb methods (head, get, post,
-    # patch, put, delete, options) to ensure only authorized user can request the
-    # Jupyter server
-    @tornado.web.authenticated
-    def get(self):
-        self.finish(json.dumps(repo_info()))
+import pytest
 
 
-def setup_handlers(web_app):
-    host_pattern = ".*$"
+@pytest.fixture
+def renku_repo(tmp_path):
+    """Prepares a testing repo created by renku."""
+    # based on renku-python/conftest.py::old_repository_with_submodules
+    from jl_renku.contexts import chdir
 
-    base_url = web_app.settings["base_url"]
-    route_pattern = url_path_join(base_url, "jl_renku", "get_session_info")
-    handlers = [(route_pattern, SessionInfoHandler)]
-    web_app.add_handlers(host_pattern, handlers)
+    name = "jl-extension-test-0-12"
+    base_path = Path(__file__).parent / "tests" / "fixtures" / f"{name}.tar.gz"
+
+    working_dir = tmp_path / name
+
+    with tarfile.open(str(base_path), "r") as repo:
+        repo.extractall(working_dir)
+
+    repo_path = working_dir / name
+
+    with chdir(repo_path):
+        yield repo_path

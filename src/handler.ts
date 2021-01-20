@@ -47,3 +47,16 @@ export async function requestAPI<T>(
 
   return data;
 }
+
+export interface ISessionInfoData {
+  project: string;
+  renkulabUrl: string;
+  branch: string;
+  commit: string;
+}
+
+export async function retrieveSessionInfo(
+  init: RequestInit = {}
+): Promise<ISessionInfoData> {
+  return requestAPI<ISessionInfoData>("get_session_info");
+}

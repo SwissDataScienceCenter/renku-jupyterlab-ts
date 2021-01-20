@@ -23,7 +23,7 @@ interface IClipboardProps {
  * A component that copies text to the clipboard
  * @param {string} [clipboardText] - Text to copy to the clipboard
  */
-const Clipboard: FunctionComponent<IClipboardProps> = ({ clipboardText = null }): JSX.Element => {
+function Clipboard({ clipboardText = null }: IClipboardProps): JSX.Element {
   const [copied, setCopied] = useState(false);
   const timeoutDur = 3000;
 
@@ -44,7 +44,7 @@ const Clipboard: FunctionComponent<IClipboardProps> = ({ clipboardText = null })
       }
     </ReactClipboard>
   );
-};
+}
 
 interface IDocLinkProps {
   url: string;
@@ -52,7 +52,7 @@ interface IDocLinkProps {
 }
 
 
-const DocLink: FunctionComponent<IDocLinkProps> = ( { url = null, text = "" }): JSX.Element => {
+const DocLink: FunctionComponent<IDocLinkProps> = ( { url = null, text = "" }: IDocLinkProps): JSX.Element => {
   return <a className="doc" href={url} role="button" target="_blank" rel="noreferrer noopener">
     {text}
   </a>;
@@ -65,7 +65,7 @@ interface ICommandDescProps {
 }
 
 const CommandDesc: FunctionComponent<ICommandDescProps> =
-  ( { command = "", desc = "", clipboard = true }): JSX.Element => {
+  ( { command = "", desc = "", clipboard = true }: ICommandDescProps): JSX.Element => {
     return <div>
       <code>{command}</code>
       {
