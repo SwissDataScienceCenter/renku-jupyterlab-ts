@@ -36,7 +36,8 @@ def _jupyter_server_extension_points():
 
 
 def _load_jupyter_server_extension(server_app):
-    """Registers the API handler to receive HTTP requests from the frontend extension.
+    """Registers the API handler to receive HTTP requests from the frontend
+    extension.
 
     Parameters
     ----------
@@ -44,4 +45,4 @@ def _load_jupyter_server_extension(server_app):
         JupyterLab application instance
     """
     setup_handlers(server_app.web_app)
-    server_app.log.info("Registered HelloWorld extension at URL path /jl_renku")
+    server_app.log.info("Registered jl_renku extension at URL path /jl_renku")

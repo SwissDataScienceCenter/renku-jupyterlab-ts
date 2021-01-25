@@ -37,13 +37,16 @@ labext_name = "jl-renku"
 
 data_files_spec = [
     ("share/jupyter/labextensions/%s" % labext_name, str(lab_path), "**"),
-    ("share/jupyter/labextensions/%s" % labext_name, str(HERE), "install.json"),
+    ("share/jupyter/labextensions/%s" % labext_name, str(HERE), "install.json"),  # noqa: 501
     ("etc/jupyter/jupyter_server_config.d", "jupyter-config", "jl_renku.json"),
 ]
 
-cmdclass = create_cmdclass("jsdeps", package_data_spec=package_data_spec, data_files_spec=data_files_spec)
+cmdclass = create_cmdclass("jsdeps", package_data_spec=package_data_spec, data_files_spec=data_files_spec)  # noqa: 501
 
-js_command = combine_commands(install_npm(HERE, build_cmd="build:prod", npm=["jlpm"]), ensure_targets(jstargets),)
+js_command = combine_commands(
+    install_npm(HERE, build_cmd="build:prod", npm=["jlpm"]),
+    ensure_targets(jstargets),
+)
 
 is_repo = (HERE / ".git").exists()
 if is_repo:
