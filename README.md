@@ -4,7 +4,7 @@
 
 A JupyterLab extension for Renku.
 
-This extension is composed of a Python package named `jl-renku`
+This extension is composed of a Python package named `jl_renku`
 for the server extension and a NPM package named `jl-renku`
 for the frontend extension.
 
@@ -14,7 +14,7 @@ for the frontend extension.
 
 ## Install
 
-To install from pypi, run the following command (this will fail at the moment, since jl-renku has not been published to pypi yet):
+To install from pypi, run the following command (this will fail at the moment, since jl_renku has not been published to pypi yet):
 
 ```bash
 pip install jl_renku
@@ -68,7 +68,7 @@ The `jlpm` command is JupyterLab's pinned version of
 
 ```bash
 # Clone the repo to your local environment
-# Change directory to the jl-renku directory
+# Change directory to the renku-jupyterlab-ts directory
 # Install package in development mode
 pip install -e .
 # Link your development version of the extension with JupyterLab
@@ -115,6 +115,6 @@ You will find the package in the `dist/` directory.
 ### Uninstall
 
 ```bash
-pip uninstall jl-renku
+pip uninstall jl_renku
 jupyter labextension uninstall jl-renku
 ```
