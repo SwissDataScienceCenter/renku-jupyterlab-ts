@@ -44,6 +44,11 @@ function SessionInfoTable({ sessionInfo = null }: ISessionInfoTableProps): JSX.E
       <SessionInfoTableRow header="Project" value={sessionInfo.project} component={projectLink} />
       <SessionInfoTableRow header="Branch" value={sessionInfo.branch} />
       <SessionInfoTableRow header="Commit" value={sessionInfo.commit} />
+      {
+        (sessionInfo.isDirty) ?
+          <SessionInfoTableRow header="Status" value="There is work that needs to be committed." /> :
+          null
+      }
     </tbody>
   </table>;
 }
@@ -54,13 +59,13 @@ function SessionInfoTable({ sessionInfo = null }: ISessionInfoTableProps): JSX.E
  */
 function SessionInfo(): JSX.Element {
   const [sessionInfo, setSessionInfo] = useState({
-    project: null, renkulabUrl: null, branch: null, commit: null });
+    project: null, renkulabUrl: null, branch: null, commit: null, isDirty: null });
   useEffect(() => {
     (async function(): Promise<void> {
       const sessionInfo = await retrieveSessionInfo();
       setSessionInfo(sessionInfo);
     })();
-  }, []);
+  });
   return <div className="container">
     <header>
       <h1>Session Info</h1>

@@ -43,4 +43,5 @@ def repo_info(path="."):
     result["renkulabUrl"] = renkulab_url
     result["branch"] = str(repo.active_branch)
     result["commit"] = str(repo.head.ref.commit.hexsha)
+    result["isDirty"] = repo.is_dirty(untracked_files=True)
     return result

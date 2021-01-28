@@ -30,6 +30,12 @@ def test_session_info_implicit(renku_repo):
     assert repo_info["renkulabUrl"] == "https://dev.renku.ch/projects/cramakri/jl-extension-test-0-12"
     assert repo_info["branch"] == str(repo.active_branch)
     assert repo_info["commit"] == str(repo.head.ref.commit.hexsha)
+    assert repo_info["isDirty"] is False
+
+    with open(os.path.join(renku_repo, "foo.txt"), "w+") as f:
+        f.write("Blah blah\n")
+
+    assert core.repo_info()["isDirty"] is True
 
 
 def test_session_info_explicit(renku_repo):

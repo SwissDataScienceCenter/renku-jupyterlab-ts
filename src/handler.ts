@@ -53,6 +53,7 @@ export interface ISessionInfoData {
   renkulabUrl: string;
   branch: string;
   commit: string;
+  isDirty: boolean;
 }
 
 export async function retrieveSessionInfo(
