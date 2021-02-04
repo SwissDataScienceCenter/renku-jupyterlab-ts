@@ -9,7 +9,7 @@ import React, { useState, useEffect } from "react";
 
 import { renkuIcon } from "../icons";
 import { ISessionInfoData, retrieveSessionInfo } from "../../handler";
-import { ExternalLink } from "./shared";
+import { CommandDesc, ExternalLink } from "./shared";
 
 interface ISessionInfoTableRowProps {
   header: string;
@@ -39,6 +39,7 @@ interface ISessionInfoTableProps {
 
 function SessionInfoTable({ sessionInfo = null }: ISessionInfoTableProps): JSX.Element {
   const projectLink = <ExternalLink url={sessionInfo.renkulabUrl} text="View in RenkuLab" />;
+  const statusCommand = <CommandDesc command="git status" desc="Run to find out what changed." />;
   return <table>
     <tbody>
       <SessionInfoTableRow header="Project" value={sessionInfo.project} component={projectLink} />
@@ -46,7 +47,9 @@ function SessionInfoTable({ sessionInfo = null }: ISessionInfoTableProps): JSX.E
       <SessionInfoTableRow header="Commit" value={sessionInfo.commit} />
       {
         (sessionInfo.isDirty) ?
-          <SessionInfoTableRow header="Status" value="There is work that needs to be committed." /> :
+          <SessionInfoTableRow header="Status"
+            value="There is work that needs to be committed."
+            component={statusCommand} /> :
           null
       }
     </tbody>

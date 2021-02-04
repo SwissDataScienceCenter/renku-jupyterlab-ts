@@ -89,3 +89,7 @@
 .jp-RenkuSessionInfo table tbody tr th {
   text-align: right;
 }
+
+.jp-RenkuSessionInfo table tbody tr {
+  vertical-align: text-top;
+}

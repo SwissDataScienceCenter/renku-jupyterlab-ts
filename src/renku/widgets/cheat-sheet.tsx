@@ -5,46 +5,10 @@
  */
 
 import { ReactWidget, MainAreaWidget } from "@jupyterlab/apputils";
-import React, { FunctionComponent, useState, useEffect, useRef } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faCopy } from "@fortawesome/free-solid-svg-icons";
-import ReactClipboard from "react-clipboard.js";
+import React, { FunctionComponent } from "react";
 
 import { renkuIcon } from "../icons";
-
-
-interface IClipboardProps {
-  clipboardText: string;
-}
-
-/**
- * Clipboard (copied from client/src/utils/UIComponents.js)
- *
- * A component that copies text to the clipboard
- * @param {string} [clipboardText] - Text to copy to the clipboard
- */
-function Clipboard({ clipboardText = null }: IClipboardProps): JSX.Element {
-  const [copied, setCopied] = useState(false);
-  const timeoutDur = 3000;
-
-  // keep track of mounted state
-  const isMounted = useRef(true);
-  useEffect(() => {
-    isMounted.current = true;
-    return (): void => { isMounted.current = false; };
-  }, []);
-
-  return (
-    <ReactClipboard component="a" data-clipboard-text={clipboardText} onSuccess={
-      (): void => { setCopied(true); setTimeout(() => { if (isMounted.current) setCopied(false); }, timeoutDur); }
-    }> {
-        (copied) ?
-          <FontAwesomeIcon icon={faCheck} color="green" /> :
-          <FontAwesomeIcon icon={faCopy} />
-      }
-    </ReactClipboard>
-  );
-}
+import { CommandDesc } from "./shared";
 
 interface IDocLinkProps {
   url: string;
@@ -58,22 +22,6 @@ const DocLink: FunctionComponent<IDocLinkProps> = ( { url = null, text = "" }: I
   </a>;
 };
 
-interface ICommandDescProps {
-  command: string;
-  desc: string|JSX.Element;
-  clipboard?: boolean;
-}
-
-const CommandDesc: FunctionComponent<ICommandDescProps> =
-  ( { command = "", desc = "", clipboard = true }: ICommandDescProps): JSX.Element => {
-    return <div>
-      <code>{command}</code>
-      {
-        (clipboard === true) ? <Clipboard clipboardText={command} /> : null
-      }
-      <p className="renku-info" style={{ paddingTop: "3px" }}>{desc}</p>
-    </div>;
-  };
 
 const TypicalWorkflow = (): JSX.Element => {
   return <React.Fragment>
