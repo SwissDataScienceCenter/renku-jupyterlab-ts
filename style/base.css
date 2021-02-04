@@ -1,0 +1,91 @@
+
+.jp-RenkuPanel {
+  color: var(--jp-ui-font-color1);
+  background: var(--jp-layout-color1);
+  font-size: var(--jp-ui-font-size1);
+}
+
+.jp-RenkuPanel div header {
+  border-bottom: var(--jp-border-width) solid var(--jp-border-color2)
+}
+
+.jp-RenkuPanel div header h2 {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: var(--jp-ui-font-size0);
+  padding: 8px 8px 8px 12px;
+  margin: 0;
+}
+
+.jp-RenkuPanel div {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+/* Table rows on the RenkuPanel widget are basically buttons. */
+.jp-RenkuPanel table {
+  border-collapse: collapse;
+  font-size: var(--jp-ui-font-size1);
+  width: 100%;
+}
+
+.jp-RenkuPanel table tbody tr {
+  padding: 0 4px 0 4px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.jp-RenkuPanel table tbody tr:hover {
+  background: var(--jp-brand-color0);
+  color: var(--jp-ui-inverse-font-color1);
+  cursor: pointer;
+}
+
+.jp-Renku {
+  overflow: scroll;
+}
+
+.jp-Renku div.container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  padding: 10px;
+  color: var(--jp-ui-font-color1);
+}
+
+.jp-Renku div header {
+  border-bottom: var(--jp-border-width) solid var(--jp-border-color2)
+}
+
+.jp-Renku div.row {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.jp-Renku div.row div {
+  flex-basis: 0;
+  flex-grow: 1;
+  padding: 0 10px 5px 0;
+}
+
+.jp-Renku div.col {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.jp-Renku a.doc {
+  font-style: italic;
+  text-decoration: underline;
+}
+
+.renku-info {
+  color: var(--jp-ui-font-color2);
+}
+
+.jp-RenkuSessionInfo table tbody tr th {
+  text-align: right;
+}
