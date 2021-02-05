@@ -26,8 +26,14 @@ jobs:
     - name: Build the extension
       run: |
         jlpm
+    - name: Test the extension
+      run: |
         jlpm run eslint:check
         python -m pip install .
 
         jupyter labextension list 2>&1 | grep -ie "jl-renku.*OK"
+        jupyter server extension list 2>&1 | grep -ie "jl_renku.*OK"
         python -m jupyterlab.browser_check
+
+        python -m pip install .[tests]
+        pytest -v

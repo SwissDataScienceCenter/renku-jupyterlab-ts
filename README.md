@@ -4,21 +4,20 @@
 
 A JupyterLab extension for Renku.
 
-This extension is composed of a Python package named `jl-renku`
+This extension is composed of a Python package named `jl_renku`
 for the server extension and a NPM package named `jl-renku`
 for the frontend extension.
 
-
 ## Requirements
 
-* JupyterLab >= 3.0
+- JupyterLab >= 3.0
 
 ## Install
 
-To install from pypi, run the following command (this will fail at the moment, since jl-renku has not been published to pypi yet):
+To install from pypi, run the following command (this will fail at the moment, since jl_renku has not been published to pypi yet):
 
 ```bash
-pip install jl-renku
+pip install jl_renku
 ```
 
 If you have NodeJS available, you can also install from the repo:
@@ -26,7 +25,6 @@ If you have NodeJS available, you can also install from the repo:
 ```bash
 pip install .
 ```
-
 
 ## Troubleshoot
 
@@ -43,7 +41,6 @@ the frontend extension, check the frontend extension is installed:
 ```bash
 jupyter labextension list
 ```
-
 
 ## Contributing
 
@@ -71,7 +68,7 @@ The `jlpm` command is JupyterLab's pinned version of
 
 ```bash
 # Clone the repo to your local environment
-# Change directory to the jl-renku directory
+# Change directory to the renku-jupyterlab-ts directory
 # Install package in development mode
 pip install -e .
 # Link your development version of the extension with JupyterLab
@@ -97,9 +94,27 @@ By default, the `jlpm run build` command generates the source maps for this exte
 jupyter lab build --minimize=False
 ```
 
+### Building
+
+To build the extension for deployment as a python package, first make sure `jupyter_packaging` is installed. If not, install it with
+
+```
+pip install jupyter_packaging
+```
+
+Then you can create a wheel package with
+
+```
+python setup.py bdist_wheel
+```
+
+You will find the package in the `dist/` directory.
+
+[Refer to the JupyterLab documentation](https://jupyterlab.readthedocs.io/en/stable/extension/extension_tutorial.html?highlight=extension#packaging-your-extension) for more detailed instructions.
+
 ### Uninstall
 
 ```bash
-pip uninstall jl-renku
+pip uninstall jl_renku
 jupyter labextension uninstall jl-renku
 ```

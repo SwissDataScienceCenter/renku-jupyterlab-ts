@@ -12,8 +12,6 @@ import {
   RegisterRenkuCommands,
 } from "./renku";
 
-import { requestAPI } from "./handler";
-
 /**
  * Initialization data for the jl-renku extension.
  */
@@ -27,8 +25,8 @@ const extension: JupyterFrontEndPlugin<void> = {
     palette: ICommandPalette
   ) => {
     // DEBUG
-    // eslint-disable-next-line
-    console.log("JupyterLab extension jl-renku is activated!");
+    //
+    // console.log("JupyterLab extension jl-renku is activated!");
 
     const renkuMain = CreateRenkuPanelWidget(app.commands);
 
@@ -43,19 +41,6 @@ const extension: JupyterFrontEndPlugin<void> = {
 
     // Add the command to the palette.
     palette.addItem({ command: CommandIds.renkuMain, category: "Renku" });
-
-    requestAPI<any>("get_example")
-      .then(data => {
-        // DEBUG
-        // eslint-disable-next-line
-        console.log(data);
-      })
-      .catch(reason => {
-        // eslint-disable-next-line
-        console.error(
-          `The jl-renku server extension appears to be missing.\n${reason}`
-        );
-      });
   }
 };
 

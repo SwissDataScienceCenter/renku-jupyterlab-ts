@@ -12,7 +12,7 @@ import { CommandIds } from "./commands";
 function CreateRenkuMenu(commands: CommandRegistry): Menu {
   const menu = new Menu({ commands });
   menu.title.label = "Renku";
-  const menuCommands = [CommandIds.podInfo, CommandIds.cheatSheet];
+  const menuCommands = [CommandIds.sessionInfo, CommandIds.cheatSheet];
   menuCommands.forEach(command => menu.addItem({ command }));
   return menu;
 }

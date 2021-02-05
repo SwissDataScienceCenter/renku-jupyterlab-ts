@@ -8,11 +8,11 @@ import { CommandRegistry } from "@lumino/commands";
 import { Widget } from "@lumino/widgets";
 import { JupyterFrontEnd } from "@jupyterlab/application";
 
-import { RenkuPanelWidget, CreatePodInfoWidget, CreateCheatSheetWidget } from "./widgets";
+import { RenkuPanelWidget, CreateSessionInfoWidget, CreateCheatSheetWidget } from "./widgets";
 
 namespace CommandIds {
   export const renkuMain = "renku:main";
-  export const podInfo = "renku:pod-info";
+  export const sessionInfo = "renku:session-info";
   export const cheatSheet = "renku:cheat-sheet";
 }
 
@@ -54,11 +54,11 @@ function RegisterRenkuCommands(
     }
   });
 
-  // Command to show the pod info
-  commands.addCommand(CommandIds.podInfo, {
-    label: "Pod Info",
+  // Command to show the session info
+  commands.addCommand(CommandIds.sessionInfo, {
+    label: "Session Info",
     execute: () => {
-      const widget = widgetRegistry.getWidget(CommandIds.podInfo, () => CreatePodInfoWidget());
+      const widget = widgetRegistry.getWidget(CommandIds.sessionInfo, () => CreateSessionInfoWidget());
       showWidget(shell, widget);
     }
   });

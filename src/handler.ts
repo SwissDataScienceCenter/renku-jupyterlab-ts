@@ -17,7 +17,7 @@ export async function requestAPI<T>(
   const settings = ServerConnection.makeSettings();
   const requestUrl = URLExt.join(
     settings.baseUrl,
-    "jl-renku", // API Namespace
+    "jl_renku", // API Namespace
     endPoint
   );
 
@@ -46,4 +46,18 @@ export async function requestAPI<T>(
 
 
   return data;
+}
+
+export interface ISessionInfoData {
+  project: string;
+  renkulabUrl: string;
+  branch: string;
+  commit: string;
+  isDirty: boolean;
+}
+
+export async function retrieveSessionInfo(
+  init: RequestInit = {}
+): Promise<ISessionInfoData> {
+  return requestAPI<ISessionInfoData>("get_session_info");
 }

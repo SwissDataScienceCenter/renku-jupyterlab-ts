@@ -86,6 +86,7 @@ module.exports = {
           "noreferrer",
           "noopener",
           "renku",
+          "renkulab",
           "scrollbar",
           "svgstr"
         ]

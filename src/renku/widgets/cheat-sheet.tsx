@@ -5,46 +5,10 @@
  */
 
 import { ReactWidget, MainAreaWidget } from "@jupyterlab/apputils";
-import React, { FunctionComponent, useState, useEffect, useRef } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faCopy } from "@fortawesome/free-solid-svg-icons";
-import ReactClipboard from "react-clipboard.js";
+import React, { FunctionComponent } from "react";
 
 import { renkuIcon } from "../icons";
-
-
-interface IClipboardProps {
-  clipboardText: string;
-}
-
-/**
- * Clipboard (copied from client/src/utils/UIComponents.js)
- *
- * A component that copies text to the clipboard
- * @param {string} [clipboardText] - Text to copy to the clipboard
- */
-const Clipboard: FunctionComponent<IClipboardProps> = ({ clipboardText = null }): JSX.Element => {
-  const [copied, setCopied] = useState(false);
-  const timeoutDur = 3000;
-
-  // keep track of mounted state
-  const isMounted = useRef(true);
-  useEffect(() => {
-    isMounted.current = true;
-    return (): void => { isMounted.current = false; };
-  }, []);
-
-  return (
-    <ReactClipboard component="a" data-clipboard-text={clipboardText} onSuccess={
-      (): void => { setCopied(true); setTimeout(() => { if (isMounted.current) setCopied(false); }, timeoutDur); }
-    }> {
-        (copied) ?
-          <FontAwesomeIcon icon={faCheck} color="green" /> :
-          <FontAwesomeIcon icon={faCopy} />
-      }
-    </ReactClipboard>
-  );
-};
+import { CommandDesc } from "./shared";
 
 interface IDocLinkProps {
   url: string;
@@ -52,28 +16,12 @@ interface IDocLinkProps {
 }
 
 
-const DocLink: FunctionComponent<IDocLinkProps> = ( { url = null, text = "" }): JSX.Element => {
+const DocLink: FunctionComponent<IDocLinkProps> = ( { url = null, text = "" }: IDocLinkProps): JSX.Element => {
   return <a className="doc" href={url} role="button" target="_blank" rel="noreferrer noopener">
     {text}
   </a>;
 };
 
-interface ICommandDescProps {
-  command: string;
-  desc: string|JSX.Element;
-  clipboard?: boolean;
-}
-
-const CommandDesc: FunctionComponent<ICommandDescProps> =
-  ( { command = "", desc = "", clipboard = true }): JSX.Element => {
-    return <div>
-      <code>{command}</code>
-      {
-        (clipboard === true) ? <Clipboard clipboardText={command} /> : null
-      }
-      <p className="renku-info" style={{ paddingTop: "3px" }}>{desc}</p>
-    </div>;
-  };
 
 const TypicalWorkflow = (): JSX.Element => {
   return <React.Fragment>
@@ -227,11 +175,9 @@ const LearnMore = (): JSX.Element => {
  */
 const CheatSheet = (): JSX.Element => {
   return <div className="container">
-    <div className="row">
-      <div>
-        <h1>Renku Cheat Sheet</h1>
-      </div>
-    </div>
+    <header>
+      <h1>Renku Cheat Sheet</h1>
+    </header>
     <TypicalWorkflow />
     <RunningAndTrackingCommands />
     <SavingProgress />
@@ -252,6 +198,7 @@ class CheatSheetWidget extends ReactWidget {
   constructor() {
     super();
     [
+      "jp-Renku",
       "jp-RenkuCheatSheet"
     ].forEach(c => this.addClass(c));
   }

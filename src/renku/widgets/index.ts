@@ -1,6 +1,6 @@
 import { CreateRenkuPanelWidget, RenkuPanelWidget } from "./panel";
-import { CreatePodInfoWidget } from "./pod-info";
+import { CreateSessionInfoWidget } from "./session-info";
 import { CreateCheatSheetWidget } from "./cheat-sheet";
 
 export { CreateRenkuPanelWidget, RenkuPanelWidget };
-export { CreatePodInfoWidget, CreateCheatSheetWidget };
+export { CreateSessionInfoWidget, CreateCheatSheetWidget };
